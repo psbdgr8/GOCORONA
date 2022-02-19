@@ -1,12 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import WelcomeScreen from './screens/WelcomeScreen'
+import SafeViewAndroid from "./components/SafeViewAndroid";
 
 export default function App() {
   return (
+    
     <View style={styles.container}>
-      <Text>Aryan Gadha</Text>
       <StatusBar style="auto" />
+      <WelcomeScreen />
     </View>
+  
   );
 }
 
