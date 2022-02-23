@@ -11,9 +11,10 @@ import React from "react";
 import { useNavigation } from '@react-navigation/core';
 import { SafeAreaView } from "react-native-web";
 import { Ionicons } from "@expo/vector-icons";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 const WelcomeScreen = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -23,18 +24,18 @@ const WelcomeScreen = () => {
       />
       <View style={styles.bottomContainer}>
         <View style={styles.bottomContainer2}>
-          <Text style={styles.title}>
+          <Text adjustsFontSizeToFit style={styles.title}>
             Be aware {"\n"}
             Stay healthy
           </Text>
-          <Text style={styles.subtitle}>
+          <Text adjustsFontSizeToFit style={styles.subtitle}>
             Welcome to COVID-19 information portal.
           </Text>
           <View style={styles.box}>
             <TouchableOpacity onPress={() => navigation.replace("COVID-19")}>
-              <Ionicons name="arrow-forward-circle" size={65} color="#9156EC" />
+              <Ionicons name="arrow-forward-circle" size={RFPercentage(7)} color="#9156EC" />
             </TouchableOpacity>
-            <Text style={styles.gettitle}>GET STARTED</Text>
+            <Text adjustsFontSizeToFit style={styles.gettitle}>GET STARTED</Text>
           </View>
         </View>
       </View>
@@ -49,9 +50,10 @@ const styles = StyleSheet.create({
   mainImage: {
     height: Dimensions.get("window").height / 1.3,
     width: Dimensions.get("window").width,
+    marginBottom: -40
   },
   bottomContainer: {
-    flex: 1.5,
+    flex: 2,
     borderTopStartRadius: 50,
     borderTopEndRadius: 50,
     backgroundColor: "white",
@@ -62,13 +64,13 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   title: {
-    fontSize: 35,
-    fontWeight: "600",
+    fontSize: RFPercentage(4.5),
+    fontWeight: "800",
     paddingLeft: 20,
     paddingTop: 5,
   },
   subtitle: {
-    fontSize: 15,
+    fontSize: RFPercentage(2),
     fontWeight: "700",
     paddingLeft: 20,
     paddingTop: 15,
@@ -79,9 +81,9 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   gettitle: {
-    fontSize: 17,
+    fontSize: RFPercentage(2.7),
     padding: 20,
-    paddingTop: 25,
+    paddingTop: RFPercentage(2),
     fontWeight: "700",
     color: "gray",
   },

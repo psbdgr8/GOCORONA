@@ -9,40 +9,69 @@ import {
   Image,
   Platform,
 } from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import SwitchSelector from "react-native-switch-selector";
 import Card from "../components/Card";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import WelcomeScreen from "./WelcomeScreen";
+import NewsScreen from "./NewsScreen";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  var [isPress, setIsPress] = React.useState(false);
+  const Drawer = createDrawerNavigator();
 
-  var touchProps = {
-    activeOpacity: 1,
-    underlayColor: "blue", // <-- "backgroundColor" will be always overwritten by "underlayColor"
-    style: isPress ? styles.btnPress : styles.btnNormal, // <-- but you can still apply other style changes
-    onHideUnderlay: () => setIsPress(false),
-    onShowUnderlay: () => setIsPress(true),
-    onPress: () => console.log("HELLO"), // <-- "onPress" is apparently required
-  };
   return (
     <View style={styles.container}>
       <Card style={styles.card}>
-        <Image
-          style={styles.mainImage}
-          source={require("../assets/doctor.png")}
-        />
+        <View style={styles.imageWrapper}>
+          <Image
+            style={styles.mainImage}
+            source={require("../assets/doctor.png")}
+          />
+        </View>
+        <View style={styles.topTextView}>
+          <Text style={styles.topText}>
+            Know safety tips{"\n"}and precautions.
+          </Text>
+        </View>
       </Card>
       <Card style={styles.card2}>
-        <TouchableOpacity>
-          <Card style={styles.smallcard}>
-            <Text>Tracker</Text>
-          </Card>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Card style={styles.smallcard}>
-            <Text>Symptoms</Text>
-          </Card>
-        </TouchableOpacity>
+        <SwitchSelector
+          initial={0}
+          textColor={"#c9815b"}
+          selectedColor={"black"}
+          buttonColor={"white"}
+          backgroundColor={"#FBD8C5"}
+          fontSize={RFPercentage(2.5)}
+          options={[
+            { label: "Tracker", value: "T" },
+            { label: "Symptoms", value: "S" },
+          ]}
+          height={50}
+          style={styles.switch}
+          onPress={(value) => console.log(`Call onPress with value: ${value}`)}
+        />
       </Card>
+      <SwitchSelector
+        initial={0}
+        textColor={"#B3B3B3"}
+        selectedColor={"#c9815b"}
+        buttonColor={"white"}
+        fontSize={RFPercentage(1.8)}
+        options={[
+          { label: "Country", value: "country" },
+          { label: "State", value: "state" },
+          { label: "City", value: "city" },
+          { label: "Worldwide", value: "world" },
+        ]}
+        style={styles.filter}
+        onPress={(value) => console.log(`Call onPress with value: ${value}`)}
+      />
+      <View style={styles.cardContainer}>
+        <Card>
+          <Text>hi</Text>
+        </Card>
+      </View>
     </View>
   );
 };
@@ -51,23 +80,49 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "column",
     alignItems: "center",
-    paddingTop: 80,
+    paddingTop: RFPercentage(3),
     backgroundColor: "white",
+  },
+  cardContainer: {
+    flex: 2,
+    flexDirection: "row",
+    alignItems: "stretch",
+    alignSelf: "stretch",
+    backgroundColor: "black",
+  },
+  topText: {
+    fontSize: RFPercentage(3),
+    fontWeight: "800",
+  },
+  topTextView: {
+    flexDirection: "column",
+    marginLeft: -20,
+    marginTop: 20,
+  },
+  filter: {
+    marginTop: 30,
+    marginRight: 40,
+    marginLeft: 20,
   },
   card: {
     width: "90%",
     height: 130,
     elevation: 1,
-    borderRadius: 25,
+    flexDirection: "row",
     backgroundColor: "#CFE3FC",
-    justifyContent: "center",
+    alignItems: "flex-start",
+  },
+  imageWrapper: {
+    marginTop: -47,
+    marginLeft: -20,
   },
   smallcard: {
     height: 45,
     elevation: 1,
     borderRadius: 25,
-    backgroundColor: "#CFE3FC",
+    backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
     width: 160,
@@ -85,7 +140,14 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     height: 200,
     width: 200,
-    marginBottom: 25,
-    marginLeft: -30,
+  },
+  switch: {
+    marginLeft: 15,
+    marginRight: 15,
+    elevation: 10,
+  },
+  selector: {
+    flex: 1,
+    backgroundColor: "yellow",
   },
 });
