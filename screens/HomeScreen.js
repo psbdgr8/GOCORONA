@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import "react-native-gesture-handler";
-import React, { useState } from "react";
+import React, { useState, Component, useEffect } from "react";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import SwitchSelector from "react-native-switch-selector";
 import Card from "../components/Card";
@@ -8,35 +8,53 @@ import { RFPercentage } from "react-native-responsive-fontsize";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 function Tracker() {
-  return (
-    <View style={{ flex: 4, justifyContent: "center" }}>
-      <SwitchSelector
-        initial={0}
-        textColor={"#B3B3B3"}
-        selectedColor={"#c9815b"}
-        buttonColor={"white"}
-        fontSize={RFPercentage(2.2)}
-        options={[
-          { label: "Country", value: "country" },
-          { label: "State", value: "state" },
-          { label: "City", value: "city" },
-          { label: "Worldwide", value: "world" },
-        ]}
-        style={styles.filter}
-        onPress={(value) => console.log(`Call onPress with value: ${value}`)}
-      />
+  const [filter, setFilter] = useState();
+  function World() {
+    const url = "https://api.covid19api.com/summary";
+    const [data, setData] = useState();
+    const [isLoading, setIsloading] = useState(false);
+    const [error, setError] = useState();
+    const Conf = data ? data.Global.TotalConfirmed : 0;
+    const Dead = data ? data.Global.TotalDeaths : 0;
+    const Active = data ? data.Global.NewConfirmed : 0;
+    const recovered = Conf - Dead - Active;
+    useEffect(() => {
+      const fetchCovidData = async () => {
+        setIsloading(true);
+        try {
+          const result = await fetch(url);
+          const response = await result.json();
+          setData(response);
+          setIsloading(false);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      fetchCovidData();
+    }, []);
+    return (
       <View style={styles.cardContainer}>
         <Card style={styles.bottomCard1}>
           <Text style={styles.bottomCardText}>Confirmed</Text>
+          <Text style={styles.number}>
+            {data ? data.Global.TotalConfirmed : 0}
+          </Text>
         </Card>
         <Card style={styles.bottomCard2}>
           <Text style={styles.bottomCardText2}>Active</Text>
+          <Text style={styles.number2}>
+            {data ? data.Global.NewConfirmed : 0}
+          </Text>
         </Card>
         <Card style={styles.bottomCard3}>
           <Text style={styles.bottomCardText3}>Recovered</Text>
+          <Text style={styles.number3}>{recovered}</Text>
         </Card>
         <Card style={styles.bottomCard4}>
           <Text style={styles.bottomCardText4}>Deceased</Text>
+          <Text style={styles.number4}>
+            {data ? data.Global.TotalDeaths : 0}
+          </Text>
         </Card>
         <Card>
           <Text style={styles.graphCardText}>Spread Trend</Text>
@@ -45,6 +63,195 @@ function Tracker() {
           <Text style={styles.graphCardText}>graph material will be here!</Text>
         </Card>
       </View>
+    );
+  }
+  function City() {
+    const url = "https://data.covid19india.org/state_district_wise.json";
+    const [data, setData] = useState();
+    const [isLoading, setIsloading] = useState(false);
+    const [error, setError] = useState();
+    useEffect(() => {
+      const fetchCovidData = async () => {
+        setIsloading(true);
+        try {
+          const result = await fetch(url);
+          const response = await result.json();
+          setData(response);
+          setIsloading(false);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      fetchCovidData();
+    }, []);
+    return (
+      <View style={styles.cardContainer}>
+        <Card style={styles.bottomCard1}>
+          <Text style={styles.bottomCardText}>Confirmed</Text>
+          <Text style={styles.number}>
+            {data ? data.Maharashtra.districtData.Mumbai.confirmed : 0}
+          </Text>
+        </Card>
+        <Card style={styles.bottomCard2}>
+          <Text style={styles.bottomCardText2}>Active</Text>
+          <Text style={styles.number2}>
+            {data ? data.Maharashtra.districtData.Mumbai.active : 0}
+          </Text>
+        </Card>
+        <Card style={styles.bottomCard3}>
+          <Text style={styles.bottomCardText3}>Recovered</Text>
+          <Text style={styles.number3}>
+            {data ? data.Maharashtra.districtData.Mumbai.recovered : 0}
+          </Text>
+        </Card>
+        <Card style={styles.bottomCard4}>
+          <Text style={styles.bottomCardText4}>Deceased</Text>
+          <Text style={styles.number4}>
+            {data ? data.Maharashtra.districtData.Mumbai.deceased : 0}
+          </Text>
+        </Card>
+        <Card>
+          <Text style={styles.graphCardText}>Spread Trend</Text>
+        </Card>
+        <Card style={styles.graph}>
+          <Text style={styles.graphCardText}>graph material will be here!</Text>
+        </Card>
+      </View>
+    );
+  }
+  function State() {
+    const url =
+      "https://api.covid19api.com/live/country/india/status/confirmed";
+    const [data, setData] = useState();
+    const [isLoading, setIsloading] = useState(false);
+    const [error, setError] = useState();
+    useEffect(() => {
+      const fetchCovidData = async () => {
+        setIsloading(true);
+        try {
+          const result = await fetch(url);
+          const response = await result.json();
+          setData(response);
+          setIsloading(false);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      fetchCovidData();
+    }, []);
+    return (
+      <View style={styles.cardContainer}>
+        <Card style={styles.bottomCard1}>
+          <Text style={styles.bottomCardText}>Confirmed</Text>
+          <Text style={styles.number}>{data ? data[13].Confirmed : 0}</Text>
+        </Card>
+        <Card style={styles.bottomCard2}>
+          <Text style={styles.bottomCardText2}>Active</Text>
+          <Text style={styles.number2}>{data ? data[13].Active : 0}</Text>
+        </Card>
+        <Card style={styles.bottomCard3}>
+          <Text style={styles.bottomCardText3}>Recovered</Text>
+          <Text style={styles.number3}>{data ? data[13].Recovered : 0}</Text>
+        </Card>
+        <Card style={styles.bottomCard4}>
+          <Text style={styles.bottomCardText4}>Deceased</Text>
+          <Text style={styles.number4}>{data ? data[13].Deaths : 0}</Text>
+        </Card>
+        <Card>
+          <Text style={styles.graphCardText}>Spread Trend</Text>
+        </Card>
+        <Card style={styles.graph}>
+          <Text style={styles.graphCardText}>graph material will be here!</Text>
+        </Card>
+      </View>
+    );
+  }
+  function Country() {
+    const url = "https://api.covid19api.com/summary";
+    const [data, setData] = useState();
+    const [isLoading, setIsloading] = useState(false);
+    const [error, setError] = useState();
+    const Conf = data ? data.Countries[77].TotalConfirmed : 0;
+    const Dead = data ? data.Countries[77].TotalDeaths : 0;
+    const Active = data ? data.Countries[77].NewConfirmed : 0;
+    const recovered = Conf - Dead - Active;
+
+    useEffect(() => {
+      const fetchCovidData = async () => {
+        setIsloading(true);
+        try {
+          const result = await fetch(url);
+          const response = await result.json();
+          setData(response);
+          setIsloading(false);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      fetchCovidData();
+    }, []);
+    return (
+      <View style={styles.cardContainer}>
+        <Card style={styles.bottomCard1}>
+          <Text style={styles.bottomCardText}>Confirmed</Text>
+          <Text style={styles.number}>
+            {data ? data.Countries[77].TotalConfirmed : 0}
+          </Text>
+        </Card>
+        <Card style={styles.bottomCard2}>
+          <Text style={styles.bottomCardText2}>Active</Text>
+          <Text style={styles.number2}>
+            {data ? data.Countries[77].NewConfirmed : 0}
+          </Text>
+        </Card>
+        <Card style={styles.bottomCard3}>
+          <Text style={styles.bottomCardText3}>Recovered</Text>
+          <Text style={styles.number3}>{recovered}</Text>
+        </Card>
+        <Card style={styles.bottomCard4}>
+          <Text style={styles.bottomCardText4}>Deceased</Text>
+          <Text style={styles.number4}>
+            {data ? data.Countries[77].TotalDeaths : 0}
+          </Text>
+        </Card>
+        <Card>
+          <Text style={styles.graphCardText}>Spread Trend</Text>
+        </Card>
+        <Card style={styles.graph}>
+          <Text style={styles.graphCardText}>graph material will be here!</Text>
+        </Card>
+      </View>
+    );
+  }
+  return (
+    <View style={{ flex: 0, justifyContent: "center" }}>
+      <SwitchSelector
+        initial={0}
+        textColor={"#B3B3B3"}
+        selectedColor={"#c9815b"}
+        buttonColor={"white"}
+        fontSize={RFPercentage(2.1)}
+        
+        options={[
+          { label: "Country", value: 1 },
+          { label: "State", value: 2 },
+          { label: "City", value: 3 },
+          { label: "Worldwide", value: 4 },
+        ]}
+        style={styles.filter}
+        onPress={(value) => setFilter(value)}
+      />
+      {filter === 1 ? (
+        <Country />
+      ) : filter === 3 ? (
+        <City />
+      ) : filter === 2 ? (
+        <State />
+      ) : filter === 4 ? (
+        <World />
+      ) : (
+        <Country />
+      )}
     </View>
   );
 }
@@ -77,6 +284,24 @@ function Symptoms() {
 const HomeScreen = () => {
   const navigation = useNavigation();
   const [showtracker, setShowTracker] = useState(true);
+  const url = "https://api.covid19api.com/summary";
+  const [data, setData] = useState();
+  const [isLoading, setIsloading] = useState(false);
+  const [error, setError] = useState();
+  useEffect(() => {
+    const fetchCovidData = async () => {
+      setIsloading(true);
+      try {
+        const result = await fetch(url);
+        const response = await result.json();
+        setData(response);
+        setIsloading(false);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchCovidData();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -88,10 +313,15 @@ const HomeScreen = () => {
           />
         </View>
         <View style={styles.topTextView}>
-          <TouchableOpacity onPress={() => {navigation.navigate("Safety")}}>
-          <Text style={styles.topText}>
-            Know safety tips{"\n"}and precautions here.
-          </Text></TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Safety");
+            }}
+          >
+            <Text style={styles.topText}>
+              Know safety tips{"\n"}and precautions here.
+            </Text>
+          </TouchableOpacity>
         </View>
       </Card>
       <Card style={styles.card2}>
@@ -132,6 +362,38 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "center",
   },
+  number: {
+    fontSize: RFPercentage(3),
+    alignSelf: "flex-end",
+    marginRight: 20,
+    marginTop: 65,
+    fontWeight: "bold",
+    color: "#FC1441",
+  },
+  number2: {
+    fontSize: RFPercentage(3),
+    alignSelf: "flex-end",
+    marginRight: 20,
+    marginTop: 65,
+    fontWeight: "bold",
+    color: "#157FFB",
+  },
+  number3: {
+    fontSize: RFPercentage(3),
+    alignSelf: "flex-end",
+    marginRight: 20,
+    marginTop: 65,
+    fontWeight: "bold",
+    color: "#30A64A",
+  },
+  number4: {
+    fontSize: RFPercentage(3),
+    alignSelf: "flex-end",
+    marginRight: 20,
+    marginTop: 65,
+    fontWeight: "bold",
+    color: "#6D757D",
+  },
   bottomCardText: {
     marginLeft: Dimensions.get("window").width / 20,
     marginTop: Dimensions.get("window").width / 33,
@@ -165,7 +427,7 @@ const styles = StyleSheet.create({
     fontSize: RFPercentage(2.5),
     fontWeight: "900",
     color: "black",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   bottomCard1: {
     height: Dimensions.get("window").width / 3,
@@ -204,21 +466,20 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width / 1.1,
     backgroundColor: "white",
     borderRadius: 20,
-    elevation: 1
+    elevation: 1,
   },
   topText: {
     fontSize: RFPercentage(3),
     fontWeight: "800",
-    alignSelf: "center",
-    textAlign: "justify",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   topTextView: {
-    flexDirection: "column",
-    marginLeft: -20,
+    flexShrink: 5,
+    marginLeft: -25,
     marginTop: 20,
+    flexWrap: "wrap",
     alignContent: "center",
-     justifyContent: "center"
+    justifyContent: "center",
   },
   filter: {
     marginTop: 5,

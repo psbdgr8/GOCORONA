@@ -118,14 +118,14 @@ const styles = StyleSheet.create({
   subTitle: {
     fontSize: 30,
     color: "darkgreen",
-    marginLeft: 15,
+    marginLeft: 20,
     marginTop: 5,
     fontWeight: "bold",
   },
   paragraph: {
     fontSize: 25,
     marginVertical: 3,
-    marginLeft: 15,
+    marginLeft: 30,
     marginRight: 15,
   },
 });
