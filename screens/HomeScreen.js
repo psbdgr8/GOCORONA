@@ -1,7 +1,15 @@
 import { useNavigation } from "@react-navigation/core";
 import "react-native-gesture-handler";
 import React, { useState, Component, useEffect } from "react";
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
+import { LineChart } from "react-native-chart-kit";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  ScrollView,
+} from "react-native";
 import SwitchSelector from "react-native-switch-selector";
 import Card from "../components/Card";
 import { RFPercentage } from "react-native-responsive-fontsize";
@@ -59,8 +67,45 @@ function Tracker() {
         <Card>
           <Text style={styles.graphCardText}>Spread Trend</Text>
         </Card>
-        <Card style={styles.graph}>
-          <Text style={styles.graphCardText}>graph material will be here!</Text>
+        <Card>
+          <LineChart
+            data={{
+              labels: ["Confirmed", "Active", "Recovered", "Deceased"],
+              datasets: [
+                {
+                  data: [
+                    data ? data.Global.TotalConfirmed : 0,
+                    data ? data.Global.NewConfirmed : 0,
+                    recovered,
+                    data ? data.Global.TotalDeaths : 0,
+                  ],
+                },
+              ],
+            }}
+            width={Dimensions.get("window").width}
+            height={RFPercentage(25)}
+            yAxisInterval={1}
+            verticalLabelRotation={-4}
+            chartConfig={{
+              backgroundColor: "#fffffff",
+              backgroundGradientFrom: "#ffffff",
+              backgroundGradientTo: "#ffffff",
+              decimalPlaces: 0,
+              barPercentage: 1,
+              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              propsForDots: {
+                r: "4",
+                strokeWidth: "2",
+                stroke: "cyan",
+              },
+            }}
+            bezier
+            style={{
+              borderRadius: 10,
+              marginBottom: -10,
+            }}
+          />
         </Card>
       </View>
     );
@@ -113,8 +158,45 @@ function Tracker() {
         <Card>
           <Text style={styles.graphCardText}>Spread Trend</Text>
         </Card>
-        <Card style={styles.graph}>
-          <Text style={styles.graphCardText}>graph material will be here!</Text>
+        <Card>
+          <LineChart
+            data={{
+              labels: ["Confirmed", "Active", "Recovered", "Deceased"],
+              datasets: [
+                {
+                  data: [
+                    data ? data.Maharashtra.districtData.Mumbai.confirmed : 0,
+                    data ? data.Maharashtra.districtData.Mumbai.active : 0,
+                    data ? data.Maharashtra.districtData.Mumbai.recovered : 0,
+                    data ? data.Maharashtra.districtData.Mumbai.deceased : 0,
+                  ],
+                },
+              ],
+            }}
+            width={Dimensions.get("window").width}
+            height={RFPercentage(25)}
+            yAxisInterval={1}
+            verticalLabelRotation={-4}
+            chartConfig={{
+              backgroundColor: "#fffffff",
+              backgroundGradientFrom: "#ffffff",
+              backgroundGradientTo: "#ffffff",
+              decimalPlaces: 0,
+              barPercentage: 1,
+              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              propsForDots: {
+                r: "4",
+                strokeWidth: "2",
+                stroke: "cyan",
+              },
+            }}
+            bezier
+            style={{
+              borderRadius: 10,
+              marginBottom: -10,
+            }}
+          />
         </Card>
       </View>
     );
@@ -160,8 +242,45 @@ function Tracker() {
         <Card>
           <Text style={styles.graphCardText}>Spread Trend</Text>
         </Card>
-        <Card style={styles.graph}>
-          <Text style={styles.graphCardText}>graph material will be here!</Text>
+        <Card>
+          <LineChart
+            data={{
+              labels: ["Confirmed", "Active", "Recovered", "Deceased"],
+              datasets: [
+                {
+                  data: [
+                    data ? data[13].Confirmed : 0,
+                    data ? data[13].Active : 0,
+                    data ? data[13].Recovered : 0,
+                    data ? data[13].Deaths : 0,
+                  ],
+                },
+              ],
+            }}
+            width={Dimensions.get("window").width}
+            height={RFPercentage(25)}
+            yAxisInterval={1}
+            verticalLabelRotation={-4}
+            chartConfig={{
+              backgroundColor: "#fffffff",
+              backgroundGradientFrom: "#ffffff",
+              backgroundGradientTo: "#ffffff",
+              decimalPlaces: 0,
+              barPercentage: 1,
+              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              propsForDots: {
+                r: "4",
+                strokeWidth: "2",
+                stroke: "cyan",
+              },
+            }}
+            bezier
+            style={{
+              borderRadius: 10,
+              marginBottom: -10,
+            }}
+          />
         </Card>
       </View>
     );
@@ -217,21 +336,57 @@ function Tracker() {
         <Card>
           <Text style={styles.graphCardText}>Spread Trend</Text>
         </Card>
-        <Card style={styles.graph}>
-          <Text style={styles.graphCardText}>graph material will be here!</Text>
+        <Card>
+          <LineChart
+            data={{
+              labels: ["Confirmed", "Active", "Recovered", "Deceased"],
+              datasets: [
+                {
+                  data: [
+                    data ? data.Countries[77].TotalConfirmed : 0,
+                    data ? data.Countries[77].NewConfirmed : 0,
+                    recovered,
+                    data ? data.Countries[77].TotalDeaths : 0,
+                  ],
+                },
+              ],
+            }}
+            width={Dimensions.get("window").width}
+            height={RFPercentage(25)}
+            yAxisInterval={1}
+            verticalLabelRotation={-4}
+            chartConfig={{
+              backgroundColor: "#fffffff",
+              backgroundGradientFrom: "#ffffff",
+              backgroundGradientTo: "#ffffff",
+              decimalPlaces: 0,
+              barPercentage: 1,
+              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              propsForDots: {
+                r: "4",
+                strokeWidth: "2",
+                stroke: "cyan",
+              },
+            }}
+            bezier
+            style={{
+              borderRadius: 10,
+              marginBottom: -10,
+            }}
+          />
         </Card>
       </View>
     );
   }
   return (
-    <View style={{ flex: 0, justifyContent: "center" }}>
+    <View style={{ flex: 3, justifyContent: "center" }}>
       <SwitchSelector
         initial={0}
         textColor={"#B3B3B3"}
         selectedColor={"#c9815b"}
         buttonColor={"white"}
         fontSize={RFPercentage(2.1)}
-        
         options={[
           { label: "Country", value: 1 },
           { label: "State", value: 2 },
@@ -241,17 +396,19 @@ function Tracker() {
         style={styles.filter}
         onPress={(value) => setFilter(value)}
       />
-      {filter === 1 ? (
-        <Country />
-      ) : filter === 3 ? (
-        <City />
-      ) : filter === 2 ? (
-        <State />
-      ) : filter === 4 ? (
-        <World />
-      ) : (
-        <Country />
-      )}
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        {filter === 1 ? (
+          <Country />
+        ) : filter === 3 ? (
+          <City />
+        ) : filter === 2 ? (
+          <State />
+        ) : filter === 4 ? (
+          <World />
+        ) : (
+          <Country />
+        )}
+      </ScrollView>
     </View>
   );
 }
@@ -465,8 +622,6 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").width / 2.65,
     width: Dimensions.get("window").width / 1.1,
     backgroundColor: "white",
-    borderRadius: 20,
-    elevation: 1,
   },
   topText: {
     fontSize: RFPercentage(3),
