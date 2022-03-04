@@ -8,6 +8,7 @@ import {
   View,
   Image,
   Dimensions,
+  ActivityIndicator,
   ScrollView,
 } from "react-native";
 import SwitchSelector from "react-native-switch-selector";
@@ -41,7 +42,9 @@ function Tracker() {
       fetchCovidData();
     }, []);
     return (
-      <View style={styles.cardContainer}>
+      <View>
+        {isLoading === true ? <ActivityIndicator size={"large"} 
+        color={"cyan"} paddingTop={Dimensions.get("window").height/2}/> : <View style={styles.cardContainer}>
         <Card style={styles.bottomCard1}>
           <Text style={styles.bottomCardText}>Confirmed</Text>
           <Text style={styles.number}>
@@ -107,6 +110,7 @@ function Tracker() {
             }}
           />
         </Card>
+      </View>}
       </View>
     );
   }
@@ -130,7 +134,9 @@ function Tracker() {
       fetchCovidData();
     }, []);
     return (
-      <View style={styles.cardContainer}>
+      <View>
+      {isLoading === true ? <ActivityIndicator size={"large"} 
+        color={"cyan"} paddingTop={Dimensions.get("window").height/2}/> : <View style={styles.cardContainer}>
         <Card style={styles.bottomCard1}>
           <Text style={styles.bottomCardText}>Confirmed</Text>
           <Text style={styles.number}>
@@ -198,7 +204,7 @@ function Tracker() {
             }}
           />
         </Card>
-      </View>
+      </View>}</View>
     );
   }
   function State() {
@@ -222,6 +228,9 @@ function Tracker() {
       fetchCovidData();
     }, []);
     return (
+      <View>
+      {isLoading === true ? <ActivityIndicator size={"large"} 
+        color={"cyan"} paddingTop={Dimensions.get("window").height/2}/> : 
       <View style={styles.cardContainer}>
         <Card style={styles.bottomCard1}>
           <Text style={styles.bottomCardText}>Confirmed</Text>
@@ -282,7 +291,7 @@ function Tracker() {
             }}
           />
         </Card>
-      </View>
+      </View>}</View>
     );
   }
   function Country() {
@@ -310,6 +319,9 @@ function Tracker() {
       fetchCovidData();
     }, []);
     return (
+      <View>
+      {isLoading === true ? <ActivityIndicator size={"large"} 
+        color={"cyan"} paddingTop={Dimensions.get("window").height/2}/> : 
       <View style={styles.cardContainer}>
         <Card style={styles.bottomCard1}>
           <Text style={styles.bottomCardText}>Confirmed</Text>
@@ -376,7 +388,7 @@ function Tracker() {
             }}
           />
         </Card>
-      </View>
+      </View>}</View>
     );
   }
   return (
