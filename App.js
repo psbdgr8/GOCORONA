@@ -7,7 +7,9 @@ import HomeScreen from "./screens/HomeScreen";
 import NewsScreen from "./screens/NewsScreen";
 import { View } from "react-native";
 import SafetyTipsScreen from "./screens/SafetyTipsScreen";
-
+import AllCountriesScreen from "./screens/AllCountriesScreen";
+import StatesOfIndiaScreen from "./screens/StatesOfIndiaScreen";
+import CitiesOfIndiaScreen from "./screens/StatesOfIndiaScreen";
 const Stack = createNativeStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -21,10 +23,32 @@ function Routes() {
           headerTitle: "",
           title: "Home",
           headerShadowVisible: false,
-          drawerLabel: "Home", 
+          drawerLabel: "India",
         }}
         name="Home"
         component={HomeScreen}
+      />
+      <Drawer.Screen
+        options={{
+          headerShown: true,
+          headerTitle: "All Countries",
+          title: "All Countries",
+          headerTitleAlign: "center",
+          headerShadowVisible: false,
+        }}
+        name="Countries"
+        component={AllCountriesScreen}
+      />
+      <Drawer.Screen
+        options={{
+          headerShown: true,
+          headerTitle: "States of India",
+          headerTitleAlign: "center",
+          title: "States of India",
+          headerShadowVisible: false,
+        }}
+        name="States"
+        component={StatesOfIndiaScreen}
       />
       <Drawer.Screen
         options={{

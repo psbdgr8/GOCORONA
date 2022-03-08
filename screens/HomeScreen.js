@@ -43,74 +43,81 @@ function Tracker() {
     }, []);
     return (
       <View>
-        {isLoading === true ? <ActivityIndicator size={"large"} 
-        color={"cyan"} paddingTop={Dimensions.get("window").height/2}/> : <View style={styles.cardContainer}>
-        <Card style={styles.bottomCard1}>
-          <Text style={styles.bottomCardText}>Confirmed</Text>
-          <Text style={styles.number}>
-            {data ? data.Global.TotalConfirmed : 0}
-          </Text>
-        </Card>
-        <Card style={styles.bottomCard2}>
-          <Text style={styles.bottomCardText2}>Active</Text>
-          <Text style={styles.number2}>
-            {data ? data.Global.NewConfirmed : 0}
-          </Text>
-        </Card>
-        <Card style={styles.bottomCard3}>
-          <Text style={styles.bottomCardText3}>Recovered</Text>
-          <Text style={styles.number3}>{recovered}</Text>
-        </Card>
-        <Card style={styles.bottomCard4}>
-          <Text style={styles.bottomCardText4}>Deceased</Text>
-          <Text style={styles.number4}>
-            {data ? data.Global.TotalDeaths : 0}
-          </Text>
-        </Card>
-        <Card>
-          <Text style={styles.graphCardText}>Spread Trend</Text>
-        </Card>
-        <Card>
-          <LineChart
-            data={{
-              labels: ["Confirmed", "Active", "Recovered", "Deceased"],
-              datasets: [
-                {
-                  data: [
-                    data ? data.Global.TotalConfirmed : 0,
-                    data ? data.Global.NewConfirmed : 0,
-                    recovered,
-                    data ? data.Global.TotalDeaths : 0,
-                  ],
-                },
-              ],
-            }}
-            width={Dimensions.get("window").width}
-            height={RFPercentage(25)}
-            yAxisInterval={1}
-            verticalLabelRotation={-4}
-            chartConfig={{
-              backgroundColor: "#fffffff",
-              backgroundGradientFrom: "#ffffff",
-              backgroundGradientTo: "#ffffff",
-              decimalPlaces: 0,
-              barPercentage: 1,
-              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              propsForDots: {
-                r: "4",
-                strokeWidth: "2",
-                stroke: "cyan",
-              },
-            }}
-            bezier
-            style={{
-              borderRadius: 10,
-              marginBottom: -10,
-            }}
+        {isLoading === true ? (
+          <ActivityIndicator
+            size={"large"}
+            color={"cyan"}
+            paddingTop={Dimensions.get("window").height / 2}
           />
-        </Card>
-      </View>}
+        ) : (
+          <View style={styles.cardContainer}>
+            <Card style={styles.bottomCard1}>
+              <Text style={styles.bottomCardText}>Confirmed</Text>
+              <Text style={styles.number}>
+                {data ? data.Global.TotalConfirmed : 0}
+              </Text>
+            </Card>
+            <Card style={styles.bottomCard2}>
+              <Text style={styles.bottomCardText2}>Active</Text>
+              <Text style={styles.number2}>
+                {data ? data.Global.NewConfirmed : 0}
+              </Text>
+            </Card>
+            <Card style={styles.bottomCard3}>
+              <Text style={styles.bottomCardText3}>Recovered</Text>
+              <Text style={styles.number3}>{recovered}</Text>
+            </Card>
+            <Card style={styles.bottomCard4}>
+              <Text style={styles.bottomCardText4}>Deceased</Text>
+              <Text style={styles.number4}>
+                {data ? data.Global.TotalDeaths : 0}
+              </Text>
+            </Card>
+            <Card>
+              <Text style={styles.graphCardText}>Spread Trend</Text>
+            </Card>
+            <Card>
+              <LineChart
+                data={{
+                  labels: ["Confirmed", "Active", "Recovered", "Deceased"],
+                  datasets: [
+                    {
+                      data: [
+                        data ? data.Global.TotalConfirmed : 0,
+                        data ? data.Global.NewConfirmed : 0,
+                        recovered,
+                        data ? data.Global.TotalDeaths : 0,
+                      ],
+                    },
+                  ],
+                }}
+                width={Dimensions.get("window").width}
+                height={RFPercentage(25)}
+                yAxisInterval={1}
+                verticalLabelRotation={-4}
+                chartConfig={{
+                  backgroundColor: "#fffffff",
+                  backgroundGradientFrom: "#ffffff",
+                  backgroundGradientTo: "#ffffff",
+                  decimalPlaces: 0,
+                  barPercentage: 1,
+                  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  propsForDots: {
+                    r: "4",
+                    strokeWidth: "2",
+                    stroke: "cyan",
+                  },
+                }}
+                bezier
+                style={{
+                  borderRadius: 10,
+                  marginBottom: -10,
+                }}
+              />
+            </Card>
+          </View>
+        )}
       </View>
     );
   }
@@ -135,76 +142,90 @@ function Tracker() {
     }, []);
     return (
       <View>
-      {isLoading === true ? <ActivityIndicator size={"large"} 
-        color={"cyan"} paddingTop={Dimensions.get("window").height/2}/> : <View style={styles.cardContainer}>
-        <Card style={styles.bottomCard1}>
-          <Text style={styles.bottomCardText}>Confirmed</Text>
-          <Text style={styles.number}>
-            {data ? data.Maharashtra.districtData.Mumbai.confirmed : 0}
-          </Text>
-        </Card>
-        <Card style={styles.bottomCard2}>
-          <Text style={styles.bottomCardText2}>Active</Text>
-          <Text style={styles.number2}>
-            {data ? data.Maharashtra.districtData.Mumbai.active : 0}
-          </Text>
-        </Card>
-        <Card style={styles.bottomCard3}>
-          <Text style={styles.bottomCardText3}>Recovered</Text>
-          <Text style={styles.number3}>
-            {data ? data.Maharashtra.districtData.Mumbai.recovered : 0}
-          </Text>
-        </Card>
-        <Card style={styles.bottomCard4}>
-          <Text style={styles.bottomCardText4}>Deceased</Text>
-          <Text style={styles.number4}>
-            {data ? data.Maharashtra.districtData.Mumbai.deceased : 0}
-          </Text>
-        </Card>
-        <Card>
-          <Text style={styles.graphCardText}>Spread Trend</Text>
-        </Card>
-        <Card>
-          <LineChart
-            data={{
-              labels: ["Confirmed", "Active", "Recovered", "Deceased"],
-              datasets: [
-                {
-                  data: [
-                    data ? data.Maharashtra.districtData.Mumbai.confirmed : 0,
-                    data ? data.Maharashtra.districtData.Mumbai.active : 0,
-                    data ? data.Maharashtra.districtData.Mumbai.recovered : 0,
-                    data ? data.Maharashtra.districtData.Mumbai.deceased : 0,
-                  ],
-                },
-              ],
-            }}
-            width={Dimensions.get("window").width}
-            height={RFPercentage(25)}
-            yAxisInterval={1}
-            verticalLabelRotation={-4}
-            chartConfig={{
-              backgroundColor: "#fffffff",
-              backgroundGradientFrom: "#ffffff",
-              backgroundGradientTo: "#ffffff",
-              decimalPlaces: 0,
-              barPercentage: 1,
-              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              propsForDots: {
-                r: "4",
-                strokeWidth: "2",
-                stroke: "cyan",
-              },
-            }}
-            bezier
-            style={{
-              borderRadius: 10,
-              marginBottom: -10,
-            }}
+        {isLoading === true ? (
+          <ActivityIndicator
+            size={"large"}
+            color={"cyan"}
+            paddingTop={Dimensions.get("window").height / 2}
           />
-        </Card>
-      </View>}</View>
+        ) : (
+          <View style={styles.cardContainer}>
+            <Card style={styles.bottomCard1}>
+              <Text style={styles.bottomCardText}>Confirmed</Text>
+              <Text style={styles.number}>
+                {data ? data.Maharashtra.districtData.Mumbai.confirmed : 0}
+              </Text>
+            </Card>
+            <Card style={styles.bottomCard2}>
+              <Text style={styles.bottomCardText2}>Active</Text>
+              <Text style={styles.number2}>
+                {data ? data.Maharashtra.districtData.Mumbai.active : 0}
+              </Text>
+            </Card>
+            <Card style={styles.bottomCard3}>
+              <Text style={styles.bottomCardText3}>Recovered</Text>
+              <Text style={styles.number3}>
+                {data ? data.Maharashtra.districtData.Mumbai.recovered : 0}
+              </Text>
+            </Card>
+            <Card style={styles.bottomCard4}>
+              <Text style={styles.bottomCardText4}>Deceased</Text>
+              <Text style={styles.number4}>
+                {data ? data.Maharashtra.districtData.Mumbai.deceased : 0}
+              </Text>
+            </Card>
+            <Card>
+              <Text style={styles.graphCardText}>Spread Trend</Text>
+            </Card>
+            <Card>
+              <LineChart
+                data={{
+                  labels: ["Confirmed", "Active", "Recovered", "Deceased"],
+                  datasets: [
+                    {
+                      data: [
+                        data
+                          ? data.Maharashtra.districtData.Mumbai.confirmed
+                          : 0,
+                        data ? data.Maharashtra.districtData.Mumbai.active : 0,
+                        data
+                          ? data.Maharashtra.districtData.Mumbai.recovered
+                          : 0,
+                        data
+                          ? data.Maharashtra.districtData.Mumbai.deceased
+                          : 0,
+                      ],
+                    },
+                  ],
+                }}
+                width={Dimensions.get("window").width}
+                height={RFPercentage(25)}
+                yAxisInterval={1}
+                verticalLabelRotation={-4}
+                chartConfig={{
+                  backgroundColor: "#fffffff",
+                  backgroundGradientFrom: "#ffffff",
+                  backgroundGradientTo: "#ffffff",
+                  decimalPlaces: 0,
+                  barPercentage: 1,
+                  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  propsForDots: {
+                    r: "4",
+                    strokeWidth: "2",
+                    stroke: "cyan",
+                  },
+                }}
+                bezier
+                style={{
+                  borderRadius: 10,
+                  marginBottom: -10,
+                }}
+              />
+            </Card>
+          </View>
+        )}
+      </View>
     );
   }
   function State() {
@@ -229,69 +250,78 @@ function Tracker() {
     }, []);
     return (
       <View>
-      {isLoading === true ? <ActivityIndicator size={"large"} 
-        color={"cyan"} paddingTop={Dimensions.get("window").height/2}/> : 
-      <View style={styles.cardContainer}>
-        <Card style={styles.bottomCard1}>
-          <Text style={styles.bottomCardText}>Confirmed</Text>
-          <Text style={styles.number}>{data ? data[13].Confirmed : 0}</Text>
-        </Card>
-        <Card style={styles.bottomCard2}>
-          <Text style={styles.bottomCardText2}>Active</Text>
-          <Text style={styles.number2}>{data ? data[13].Active : 0}</Text>
-        </Card>
-        <Card style={styles.bottomCard3}>
-          <Text style={styles.bottomCardText3}>Recovered</Text>
-          <Text style={styles.number3}>{data ? data[13].Recovered : 0}</Text>
-        </Card>
-        <Card style={styles.bottomCard4}>
-          <Text style={styles.bottomCardText4}>Deceased</Text>
-          <Text style={styles.number4}>{data ? data[13].Deaths : 0}</Text>
-        </Card>
-        <Card>
-          <Text style={styles.graphCardText}>Spread Trend</Text>
-        </Card>
-        <Card>
-          <LineChart
-            data={{
-              labels: ["Confirmed", "Active", "Recovered", "Deceased"],
-              datasets: [
-                {
-                  data: [
-                    data ? data[13].Confirmed : 0,
-                    data ? data[13].Active : 0,
-                    data ? data[13].Recovered : 0,
-                    data ? data[13].Deaths : 0,
-                  ],
-                },
-              ],
-            }}
-            width={Dimensions.get("window").width}
-            height={RFPercentage(25)}
-            yAxisInterval={1}
-            verticalLabelRotation={-4}
-            chartConfig={{
-              backgroundColor: "#fffffff",
-              backgroundGradientFrom: "#ffffff",
-              backgroundGradientTo: "#ffffff",
-              decimalPlaces: 0,
-              barPercentage: 1,
-              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              propsForDots: {
-                r: "4",
-                strokeWidth: "2",
-                stroke: "cyan",
-              },
-            }}
-            bezier
-            style={{
-              borderRadius: 10,
-              marginBottom: -10,
-            }}
+        {isLoading === true ? (
+          <ActivityIndicator
+            size={"large"}
+            color={"cyan"}
+            paddingTop={Dimensions.get("window").height / 2}
           />
-        </Card>
-      </View>}</View>
+        ) : (
+          <View style={styles.cardContainer}>
+            <Card style={styles.bottomCard1}>
+              <Text style={styles.bottomCardText}>Confirmed</Text>
+              <Text style={styles.number}>{data ? data[13].Confirmed : 0}</Text>
+            </Card>
+            <Card style={styles.bottomCard2}>
+              <Text style={styles.bottomCardText2}>Active</Text>
+              <Text style={styles.number2}>{data ? data[13].Active : 0}</Text>
+            </Card>
+            <Card style={styles.bottomCard3}>
+              <Text style={styles.bottomCardText3}>Recovered</Text>
+              <Text style={styles.number3}>
+                {data ? data[13].Recovered : 0}
+              </Text>
+            </Card>
+            <Card style={styles.bottomCard4}>
+              <Text style={styles.bottomCardText4}>Deceased</Text>
+              <Text style={styles.number4}>{data ? data[13].Deaths : 0}</Text>
+            </Card>
+            <Card>
+              <Text style={styles.graphCardText}>Spread Trend</Text>
+            </Card>
+            <Card>
+              <LineChart
+                data={{
+                  labels: ["Confirmed", "Active", "Recovered", "Deceased"],
+                  datasets: [
+                    {
+                      data: [
+                        data ? data[13].Confirmed : 0,
+                        data ? data[13].Active : 0,
+                        data ? data[13].Recovered : 0,
+                        data ? data[13].Deaths : 0,
+                      ],
+                    },
+                  ],
+                }}
+                width={Dimensions.get("window").width}
+                height={RFPercentage(25)}
+                yAxisInterval={1}
+                verticalLabelRotation={-4}
+                chartConfig={{
+                  backgroundColor: "#fffffff",
+                  backgroundGradientFrom: "#ffffff",
+                  backgroundGradientTo: "#ffffff",
+                  decimalPlaces: 0,
+                  barPercentage: 1,
+                  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  propsForDots: {
+                    r: "4",
+                    strokeWidth: "2",
+                    stroke: "cyan",
+                  },
+                }}
+                bezier
+                style={{
+                  borderRadius: 10,
+                  marginBottom: -10,
+                }}
+              />
+            </Card>
+          </View>
+        )}
+      </View>
     );
   }
   function Country() {
@@ -320,75 +350,82 @@ function Tracker() {
     }, []);
     return (
       <View>
-      {isLoading === true ? <ActivityIndicator size={"large"} 
-        color={"cyan"} paddingTop={Dimensions.get("window").height/2}/> : 
-      <View style={styles.cardContainer}>
-        <Card style={styles.bottomCard1}>
-          <Text style={styles.bottomCardText}>Confirmed</Text>
-          <Text style={styles.number}>
-            {data ? data.Countries[77].TotalConfirmed : 0}
-          </Text>
-        </Card>
-        <Card style={styles.bottomCard2}>
-          <Text style={styles.bottomCardText2}>Active</Text>
-          <Text style={styles.number2}>
-            {data ? data.Countries[77].NewConfirmed : 0}
-          </Text>
-        </Card>
-        <Card style={styles.bottomCard3}>
-          <Text style={styles.bottomCardText3}>Recovered</Text>
-          <Text style={styles.number3}>{recovered}</Text>
-        </Card>
-        <Card style={styles.bottomCard4}>
-          <Text style={styles.bottomCardText4}>Deceased</Text>
-          <Text style={styles.number4}>
-            {data ? data.Countries[77].TotalDeaths : 0}
-          </Text>
-        </Card>
-        <Card>
-          <Text style={styles.graphCardText}>Spread Trend</Text>
-        </Card>
-        <Card>
-          <LineChart
-            data={{
-              labels: ["Confirmed", "Active", "Recovered", "Deceased"],
-              datasets: [
-                {
-                  data: [
-                    data ? data.Countries[77].TotalConfirmed : 0,
-                    data ? data.Countries[77].NewConfirmed : 0,
-                    recovered,
-                    data ? data.Countries[77].TotalDeaths : 0,
-                  ],
-                },
-              ],
-            }}
-            width={Dimensions.get("window").width}
-            height={RFPercentage(25)}
-            yAxisInterval={1}
-            verticalLabelRotation={-4}
-            chartConfig={{
-              backgroundColor: "#fffffff",
-              backgroundGradientFrom: "#ffffff",
-              backgroundGradientTo: "#ffffff",
-              decimalPlaces: 0,
-              barPercentage: 1,
-              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              propsForDots: {
-                r: "4",
-                strokeWidth: "2",
-                stroke: "cyan",
-              },
-            }}
-            bezier
-            style={{
-              borderRadius: 10,
-              marginBottom: -10,
-            }}
+        {isLoading === true ? (
+          <ActivityIndicator
+            size={"large"}
+            color={"cyan"}
+            paddingTop={Dimensions.get("window").height / 2}
           />
-        </Card>
-      </View>}</View>
+        ) : (
+          <View style={styles.cardContainer}>
+            <Card style={styles.bottomCard1}>
+              <Text style={styles.bottomCardText}>Confirmed</Text>
+              <Text style={styles.number}>
+                {data ? data.Countries[77].TotalConfirmed : 0}
+              </Text>
+            </Card>
+            <Card style={styles.bottomCard2}>
+              <Text style={styles.bottomCardText2}>Active</Text>
+              <Text style={styles.number2}>
+                {data ? data.Countries[77].NewConfirmed : 0}
+              </Text>
+            </Card>
+            <Card style={styles.bottomCard3}>
+              <Text style={styles.bottomCardText3}>Recovered</Text>
+              <Text style={styles.number3}>{recovered}</Text>
+            </Card>
+            <Card style={styles.bottomCard4}>
+              <Text style={styles.bottomCardText4}>Deceased</Text>
+              <Text style={styles.number4}>
+                {data ? data.Countries[77].TotalDeaths : 0}
+              </Text>
+            </Card>
+            <Card>
+              <Text style={styles.graphCardText}>Spread Trend</Text>
+            </Card>
+            <Card>
+              <LineChart
+                data={{
+                  labels: ["Confirmed", "Active", "Recovered", "Deceased"],
+                  datasets: [
+                    {
+                      data: [
+                        data ? data.Countries[77].TotalConfirmed : 0,
+                        data ? data.Countries[77].NewConfirmed : 0,
+                        recovered,
+                        data ? data.Countries[77].TotalDeaths : 0,
+                      ],
+                    },
+                  ],
+                }}
+                width={Dimensions.get("window").width}
+                height={RFPercentage(25)}
+                yAxisInterval={1}
+                verticalLabelRotation={-4}
+                chartConfig={{
+                  backgroundColor: "#fffffff",
+                  backgroundGradientFrom: "#ffffff",
+                  backgroundGradientTo: "#ffffff",
+                  decimalPlaces: 0,
+                  barPercentage: 1,
+                  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  propsForDots: {
+                    r: "4",
+                    strokeWidth: "2",
+                    stroke: "cyan",
+                  },
+                }}
+                bezier
+                style={{
+                  borderRadius: 10,
+                  marginBottom: -10,
+                }}
+              />
+            </Card>
+          </View>
+        )}
+      </View>
     );
   }
   return (
@@ -398,12 +435,12 @@ function Tracker() {
         textColor={"#B3B3B3"}
         selectedColor={"#c9815b"}
         buttonColor={"white"}
-        fontSize={RFPercentage(2.1)}
+        fontSize={RFPercentage(1.6)}
         options={[
-          { label: "Country", value: 1 },
-          { label: "State", value: 2 },
-          { label: "City", value: 3 },
-          { label: "Worldwide", value: 4 },
+          { label: "India", value: 1 },
+          { label: "Maharashtra", value: 2 },
+          { label: "Mumbai", value: 3 },
+          { label: "World", value: 4 },
         ]}
         style={styles.filter}
         onPress={(value) => setFilter(value)}
@@ -650,8 +687,8 @@ const styles = StyleSheet.create({
   },
   filter: {
     marginTop: 5,
-    marginRight: 40,
-    marginLeft: 20,
+    marginRight: 10,
+    marginLeft: 10,
     alignSelf: "center",
   },
   card: {
