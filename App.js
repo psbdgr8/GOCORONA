@@ -1,29 +1,42 @@
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import HomeScreen from "./screens/HomeScreen";
 import NewsScreen from "./screens/NewsScreen";
-import { View } from "react-native";
 import SafetyTipsScreen from "./screens/SafetyTipsScreen";
 import AllCountriesScreen from "./screens/AllCountriesScreen";
 import StatesOfIndiaScreen from "./screens/StatesOfIndiaScreen";
-import CitiesOfIndiaScreen from "./screens/StatesOfIndiaScreen";
+import CustomDrawer, { Theme } from "./components/CustomDrawer";
+import { RFPercentage } from "react-native-responsive-fontsize";
+import { useContext, useState } from "react";
+import VaccineStatusScreen from "./screens/VaccineStatusScreen";
+import Vaccine from "./components/Vaccine";
+import VaccineStates from "./components/VaccineStates";
+import VaccineScreen from "./screens/VaccineScreen";
+import AvailableVaccine from "./screens/AvailableVaccine";
 const Stack = createNativeStackNavigator();
-
 const Drawer = createDrawerNavigator();
-
 function Routes() {
   return (
-    <Drawer.Navigator initialRouteName="Home">
+    <Drawer.Navigator
+      drawerContent={(props) => <CustomDrawer {...props} />}
+      initialRouteName="Home"
+      screenOptions={{ headerShown: false }}
+    >
       <Drawer.Screen
         options={{
           headerShown: true,
           headerTitle: "",
           title: "Home",
           headerShadowVisible: false,
-          drawerLabel: "India",
+          drawerLabel: "Home",
+          drawerLabelStyle: {
+            fontSize: RFPercentage(2),
+            color: "black",
+            fontWeight: "bold",
+          },
         }}
         name="Home"
         component={HomeScreen}
@@ -34,7 +47,11 @@ function Routes() {
           headerTitle: "All Countries",
           title: "All Countries",
           headerTitleAlign: "center",
-          headerShadowVisible: false,
+          drawerLabelStyle: {
+            fontSize: RFPercentage(2),
+            color: "black",
+            fontWeight: "bold",
+          },
         }}
         name="Countries"
         component={AllCountriesScreen}
@@ -44,8 +61,12 @@ function Routes() {
           headerShown: true,
           headerTitle: "States of India",
           headerTitleAlign: "center",
+          drawerLabelStyle: {
+            fontSize: RFPercentage(2),
+            color: "black",
+            fontWeight: "bold",
+          },
           title: "States of India",
-          headerShadowVisible: false,
         }}
         name="States"
         component={StatesOfIndiaScreen}
@@ -53,9 +74,28 @@ function Routes() {
       <Drawer.Screen
         options={{
           headerShown: true,
-          headerTitle: "",
+          headerTitle: "Vaccine Availablity",
+          headerTitleAlign: "center",
+          drawerLabelStyle: {
+            fontSize: RFPercentage(2),
+            color: "black",
+            fontWeight: "bold",
+          },
+          title: "Vaccine Availablity",
+        }}
+        name="Vaccine"
+        component={VaccineStatusScreen}
+      />
+      <Drawer.Screen
+        options={{
+          headerShown: true,
+          headerTitle: "News",
           title: "News",
-          headerShadowVisible: false,
+          drawerLabelStyle: {
+            fontSize: RFPercentage(2),
+            color: "black",
+            fontWeight: "bold",
+          },
         }}
         name="News"
         component={NewsScreen}
@@ -74,6 +114,21 @@ function App() {
           component={WelcomeScreen}
         />
         <Stack.Screen
+          options={{ headerShown: true }}
+          name="Districts"
+          component={VaccineStates}
+        />
+        <Stack.Screen
+          options={{ headerShown: true }}
+          name="Vaccination"
+          component={VaccineScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: true }}
+          name="Availablity"
+          component={AvailableVaccine}
+        />
+        <Stack.Screen
           options={{
             headerShown: false,
             title: "",
@@ -86,7 +141,6 @@ function App() {
           options={{
             headerShown: false,
             title: "News",
-            headerShadowVisible: false,
           }}
           name="News"
           component={NewsScreen}

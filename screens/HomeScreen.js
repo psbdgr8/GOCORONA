@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/core";
+import { useNavigation } from "@react-navigation/native";
 import "react-native-gesture-handler";
 import React, { useState, Component, useEffect } from "react";
 import { LineChart } from "react-native-chart-kit";
@@ -325,14 +325,10 @@ function Tracker() {
     );
   }
   function Country() {
-    const url = "https://api.covid19api.com/summary";
+    const url = "https://api.rootnet.in/covid19-in/stats/latest";
     const [data, setData] = useState();
     const [isLoading, setIsloading] = useState(false);
     const [error, setError] = useState();
-    const Conf = data ? data.Countries[77].TotalConfirmed : 0;
-    const Dead = data ? data.Countries[77].TotalDeaths : 0;
-    const Active = data ? data.Countries[77].NewConfirmed : 0;
-    const recovered = Conf - Dead - Active;
 
     useEffect(() => {
       const fetchCovidData = async () => {
@@ -361,23 +357,25 @@ function Tracker() {
             <Card style={styles.bottomCard1}>
               <Text style={styles.bottomCardText}>Confirmed</Text>
               <Text style={styles.number}>
-                {data ? data.Countries[77].TotalConfirmed : 0}
+                {data ? data.data["unofficial-summary"][0].total : 0}
               </Text>
             </Card>
             <Card style={styles.bottomCard2}>
               <Text style={styles.bottomCardText2}>Active</Text>
               <Text style={styles.number2}>
-                {data ? data.Countries[77].NewConfirmed : 0}
+                {data ? data.data["unofficial-summary"][0].active : 0}
               </Text>
             </Card>
             <Card style={styles.bottomCard3}>
               <Text style={styles.bottomCardText3}>Recovered</Text>
-              <Text style={styles.number3}>{recovered}</Text>
+              <Text style={styles.number3}>
+                {data ? data.data["unofficial-summary"][0].recovered : 0}
+              </Text>
             </Card>
             <Card style={styles.bottomCard4}>
               <Text style={styles.bottomCardText4}>Deceased</Text>
               <Text style={styles.number4}>
-                {data ? data.Countries[77].TotalDeaths : 0}
+                {data ? data.data["unofficial-summary"][0].deaths : 0}
               </Text>
             </Card>
             <Card>
@@ -390,10 +388,10 @@ function Tracker() {
                   datasets: [
                     {
                       data: [
-                        data ? data.Countries[77].TotalConfirmed : 0,
-                        data ? data.Countries[77].NewConfirmed : 0,
-                        recovered,
-                        data ? data.Countries[77].TotalDeaths : 0,
+                        data ? data.data["unofficial-summary"][0].total : 0,
+                        data ? data.data["unofficial-summary"][0].active : 0,
+                        data ? data.data["unofficial-summary"][0].recovered : 0,
+                        data ? data.data["unofficial-summary"][0].deaths : 0,
                       ],
                     },
                   ],

@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View, ActivityIndicator, ScrollView, Dimensions, FlatList} from 'react-native'
 import React, {useState, useEffect} from 'react'
-import Card from '../components/Card';
-import ItemRows from '../components/ItemsRow';
+import Vaccine from '../components/Vaccine';
 
-const AllCountriesScreen = () => {
-    const url = "https://api.covid19api.com/summary";
+const VaccineStatusScreen = () => {
+    const url = "https://cdn-api.co-vin.in/api/v2/admin/location/states";
     const [data, setData] = useState();
     const [isLoading, setIsloading] = useState(false);
     const [error,setError] = useState();
@@ -29,49 +28,22 @@ const AllCountriesScreen = () => {
         {isLoading === true ? <ActivityIndicator size={"large"} 
         color={"cyan"} paddingTop={Dimensions.get("window").height/2}/> :
         <FlatList 
-        data={data && data.Countries ?  data.Countries : 0}
-        renderItem={({item})=> <ItemRows item={item}/>
-    }  keyExtractor={(item, index) => index.toString()}
+        data={data ? data.states : 0}
+        renderItem={({item})=> <Vaccine item={item}/>}
+        keyExtractor={(item, index) => index.toString()}
+        
     />}
     </View>
   )
 }
 
-export default AllCountriesScreen
+export default VaccineStatusScreen
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "white",
         flexGrow: 1
-    },
-    content: {
-        flex: 1.5,
-        backgroundColor: "white",
-        flexGrow: 1
-    },
-    title: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        color: "brown"
-    },
-    confirmed: {
-        marginTop: 20,
-        fontSize: 20,
-        fontWeight: 'bold',
-        alignSelf: 'flex-start',
-        color: "red",
-        margin: 10,
-        marginLeft: 20,
-    },
-    death: {
-        marginTop: 0,
-        fontSize: 20,
-        margin: 10,
-        fontWeight: 'bold',
-        alignSelf: 'flex-start',
-        color: "gray",
-        marginLeft: 20,
     },
    
 })

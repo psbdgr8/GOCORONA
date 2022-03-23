@@ -31,6 +31,7 @@ const StatesOfIndiaScreen = () => {
         <FlatList 
         data={data && data ?  data : 0}
         renderItem={({item})=> <StateItemRows item={item}/>}
+        keyExtractor={(item, index) => index.toString()}
     />}
     </View>
   )

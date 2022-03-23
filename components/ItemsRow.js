@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
     margin: 10,
     fontWeight: "bold",
     alignSelf: "flex-start",
-    color: "gray",
+    color: "black",
     marginLeft: 20,
   },
   card: {
-    height: Dimensions.get("window").width / 2.5,
+    height: Dimensions.get("window").width / 2.8,
     width: Dimensions.get("window").width / 1.1,
     marginHorizontal: Dimensions.get("window").width / 50,
     backgroundColor: "#e8f2ff",

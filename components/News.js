@@ -1,5 +1,7 @@
 import React from "react";
-import { Text, View, StyleSheet, Image, Dimensions } from "react-native";
+import { Text, View, StyleSheet, Image, Dimensions, Linking } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { RFPercentage } from "react-native-responsive-fontsize";
 import Card from "./Card";
 
 
@@ -15,58 +17,57 @@ return(
           /></View>
 );
     };
+    function Url(){
+            Linking.openURL(item.url);    
+    };
   return (
-    <View style={styles.rows}>
+    <ScrollView style={styles.rows}>
       <Image
         style={styles.image}
         source={{ uri: item.urlToImage }}
         onError={DefaultImage}
       />
       <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.description}>{item.description}</Text>
-    </View>
+      <Text style={styles.description}>{item.content}</Text>
+      <TouchableOpacity onPress={(Url)}><Text style={styles.url}>Read more</Text>
+      </TouchableOpacity></ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   rows: {
-    width: "100%",
-    marginBottom: 5,
-    backgroundColor: "white",
+      flex: 1,
+      backgroundColor: "white"
   },
-  case: {
-    alignSelf: "stretch",
+  url:{
+    fontSize: RFPercentage(2.5),
+    fontWeight: "normal",
+    alignSelf: "flex-end",
+    color: "blue",
+    marginRight: 10,
+    textDecorationLine: "underline",
+    textDecorationColor: "blue"
   },
   title: {
-    fontSize: 30,
-    marginTop: 20,
+    fontSize: RFPercentage(4),
     fontWeight: "bold",
     color: "black",
-    alignSelf: "center",
-    alignContent: "center",
-    alignItems: "center",
+    marginLeft: RFPercentage(1),
+    marginRight: RFPercentage(1),
+    textAlign: "auto"
   },
   description: {
-    marginTop: 10,
-    fontSize: 22,
+    marginTop: 5,
+    fontSize: RFPercentage(2.8),
     fontWeight: "normal",
-    alignSelf: "flex-start",
     color: "black",
-    margin: 10,
-    marginLeft: 10,
-  },
-  death: {
-    marginTop: 0,
-    fontSize: 20,
-    margin: 10,
-    fontWeight: "bold",
-    alignSelf: "flex-start",
-    color: "gray",
-    marginLeft: 20,
+    marginLeft: RFPercentage(1),
+    marginRight: RFPercentage(1),
+    textAlign: "auto"
   },
   image: {
-    width: Dimensions.get("window").width / 1.1,
-    height: Dimensions.get("window").width / 1.1,
+    width: Dimensions.get("window").width / 1,
+    height: Dimensions.get("window").width / 1,
     alignSelf: "center",
   },
   card: {
@@ -80,12 +81,6 @@ const styles = StyleSheet.create({
     alignContent: "flex-start",
     flexGrow: 1,
     flexWrap: "wrap",
-  },
-  flag: {
-    height: 30,
-    width: 40,
-    padding: 10,
-    borderRadius: 1000,
   },
 });
 

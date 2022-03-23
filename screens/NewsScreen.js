@@ -1,16 +1,18 @@
 import { StyleSheet, Text, View, Dimensions, ActivityIndicator, FlatList } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/core";
 import News from "../components/News";
-import Carousel from "react-native-snap-carousel";
+import Carousel, {Pagination} from "react-native-snap-carousel";
 
 const NewsScreen = () => {
   const navigation = useNavigation();
   const url =
-    "https://newsapi.org/v2/everything?q=COVID&sortBy=popularity&language=en&apiKey=74475e7b2056458b89758418414e5621";
+    "https://newsapi.org/v2/everything?q=coronavirus%covid&sortBy=popularity&language=en&apiKey=74475e7b2056458b89758418414e5621";
     const [data, setData] = useState();
     const [isLoading, setIsloading] = useState(false);
     const [error,setError] = useState();
+    const [index, setIndex] = useState(0)
+  const isCarousel = useRef(null)
     useEffect(() => {
         const fetchCovidData = async () => {
             setIsloading(true);
@@ -38,16 +40,34 @@ const NewsScreen = () => {
       }
     /> */}
     <Carousel
-    layout="stack"
-    layoutCardOffset={7}
+    layout="default"
+    layoutCardOffset={10}
+    ref={isCarousel}
     data={data ? data.articles : 0}
-    sliderHeight={500}
-    itemHeight={Dimensions.get("window").height}
-    vertical={true}
+    sliderWidth={Dimensions.get("window").width}
+    itemWidth={Dimensions.get("window").width}
+    onSnapToItem={(index) => setIndex(index)}
     renderItem={({ item}) => (
       <News item={item}/>
     )}
-  /></View>}
+    keyExtractor={(item, index) => index.toString()}
+  /><Pagination
+  dotsLength={data? data.articles.length : 0}
+  activeDotIndex={index}
+  carouselRef={isCarousel}
+  dotStyle={{
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginHorizontal: 0,
+    color: "blue",
+    backgroundColor: 'rgba(0, 0, 0, 0.92)'
+  }}
+  inactiveDotOpacity={0.4}
+  inactiveDotScale={0.6}
+  tappableDots={true}
+  />
+  </View>}
     </View>
   )
 }
@@ -57,10 +77,9 @@ export default NewsScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "white"
   },
  content: {
-   flex:1.5,
-   margin: 10
+   flex:1.5
  },
 });
