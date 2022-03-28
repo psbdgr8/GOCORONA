@@ -47,7 +47,7 @@ const CustomDrawer = (props) => {
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
-      {/* <View style={{ padding: 8, borderTopWidth: 3, borderTopColor: isDarkMode ? "#1a1aff" : "#ccc" }}>
+      <View style={{ padding: 8, borderTopWidth: 3, borderTopColor: isDarkMode ? "#1a1aff" : "#ccc" }}>
         <View
           style={{
             flexDirection: "row",
@@ -76,7 +76,7 @@ const CustomDrawer = (props) => {
             value={isDarkMode}
           />
         </View>
-      </View> */}
+      </View>
     </View>
   );
 };

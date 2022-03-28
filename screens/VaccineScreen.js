@@ -15,7 +15,7 @@ const VaccineScreen = ({ route }) => {
   const navigation = useNavigation();
   const { cityId } = route.params;
   const date = new Date().getDate();
-  const month = new Date().getMonth();
+  const month = new Date().getMonth()+1;
   const year = new Date().getFullYear();
   const url =
     "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id="+cityId+"&date="+date+"-"+month+"-"+year;

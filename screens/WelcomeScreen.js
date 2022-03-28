@@ -5,11 +5,11 @@ import {
   Text,
   View,
   Dimensions,
+  StatusBar,
   TouchableOpacity,
 } from "react-native";
 import React from "react";
 import { useNavigation } from '@react-navigation/core';
-import { SafeAreaView } from "react-native-web";
 import { Ionicons } from "@expo/vector-icons";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 

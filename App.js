@@ -2,9 +2,11 @@ import "react-native-gesture-handler";
 import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationRouteContext, useNavigation } from "@react-navigation/core";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import HomeScreen from "./screens/HomeScreen";
 import NewsScreen from "./screens/NewsScreen";
+import {StatusBar} from "react-native"
 import SafetyTipsScreen from "./screens/SafetyTipsScreen";
 import AllCountriesScreen from "./screens/AllCountriesScreen";
 import StatesOfIndiaScreen from "./screens/StatesOfIndiaScreen";
@@ -16,9 +18,15 @@ import Vaccine from "./components/Vaccine";
 import VaccineStates from "./components/VaccineStates";
 import VaccineScreen from "./screens/VaccineScreen";
 import AvailableVaccine from "./screens/AvailableVaccine";
+import SearchByPincode from "./screens/SearchByPincode";
+import {Text} from "react-native";
+import IonIcon from 'react-native-vector-icons/Ionicons';
+import { TouchableOpacity } from "react-native-gesture-handler";
+import Pincode from "./screens/Pincode";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 function Routes() {
+  const navigation = useNavigation();
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawer {...props} />}
@@ -76,6 +84,14 @@ function Routes() {
           headerShown: true,
           headerTitle: "Vaccine Availablity",
           headerTitleAlign: "center",
+          headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate("Pincode")}>
+              <IonIcon 
+              name="search"
+              size={RFPercentage(3)}
+              style={{marginRight: RFPercentage(1.5)}}
+              />
+            </TouchableOpacity>),
           drawerLabelStyle: {
             fontSize: RFPercentage(2),
             color: "black",
@@ -86,6 +102,21 @@ function Routes() {
         name="Vaccine"
         component={VaccineStatusScreen}
       />
+      {/* <Drawer.Screen
+        options={{
+          headerShown: true,
+          headerTitle: "Vaccine Availablity",
+          headerTitleAlign: "center",
+          drawerLabelStyle: {
+            fontSize: RFPercentage(2),
+            color: "black",
+            fontWeight: "bold",
+          },
+          title: "Search by Pincode",
+        }}
+        name="Pincode"
+        component={SearchByPincode}
+      /> */}
       <Drawer.Screen
         options={{
           headerShown: true,
@@ -107,6 +138,9 @@ function Routes() {
 function App() {
   return (
     <NavigationContainer>
+      <StatusBar backgroundColor="transparent" animated={true}
+        barStyle="dark-content" translucent={true}
+      />
       <Stack.Navigator>
         <Stack.Screen
           options={{ headerShown: false }}
@@ -120,8 +154,18 @@ function App() {
         />
         <Stack.Screen
           options={{ headerShown: true }}
+          name="Pincode"
+          component={Pincode}
+        />
+        <Stack.Screen
+          options={{ headerShown: true }}
           name="Vaccination"
           component={VaccineScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: true }}
+          name="Search"
+          component={SearchByPincode}
         />
         <Stack.Screen
           options={{ headerShown: true }}
