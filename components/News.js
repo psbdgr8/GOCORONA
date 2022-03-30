@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Text, View, StyleSheet, Image, Dimensions, Linking } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { RFPercentage } from "react-native-responsive-fontsize";
 import Card from "./Card";
-
+import {darkModeContext} from "../API/Context"
 
 const News = ({ item }) => {
+  const [isDarkMode] = useContext(darkModeContext);
     function DefaultImage() {
 return(
     <View>
@@ -21,14 +22,15 @@ return(
             Linking.openURL(item.url);    
     };
   return (
-    <ScrollView style={styles.rows}>
+    <ScrollView style={{
+      backgroundColor: isDarkMode === true ? "black" : "white", ...styles.rows}}>
       <Image
         style={styles.image}
         source={{ uri: item.urlToImage }}
         onError={DefaultImage}
       />
-      <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.description}>{item.content}</Text>
+      <Text style={{color : isDarkMode === true ? "white" : "black",...styles.title}}>{item.title}</Text>
+      <Text style={{color : isDarkMode === true ? "white" : "black",...styles.description}}>{item.content}</Text>
       <TouchableOpacity onPress={(Url)}><Text style={styles.url}>Read more</Text>
       </TouchableOpacity></ScrollView>
   );
@@ -37,7 +39,6 @@ return(
 const styles = StyleSheet.create({
   rows: {
       flex: 1,
-      backgroundColor: "white"
   },
   url:{
     fontSize: RFPercentage(2.5),
@@ -51,7 +52,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: RFPercentage(4),
     fontWeight: "bold",
-    color: "black",
     marginLeft: RFPercentage(1),
     marginRight: RFPercentage(1),
     textAlign: "auto"
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: RFPercentage(2.8),
     fontWeight: "normal",
-    color: "black",
     marginLeft: RFPercentage(1),
     marginRight: RFPercentage(1),
     textAlign: "auto"

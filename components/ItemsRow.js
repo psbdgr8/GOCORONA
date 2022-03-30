@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Text, View, StyleSheet, Image, Dimensions } from "react-native";
 import Card from "./Card";
+import {darkModeContext} from "../API/Context"
 
 const ItemRows = ({ item }) => {
+  const [isDarkMode] = useContext(darkModeContext);
   return (
-    <View style={styles.rows}>
+    <View style={{backgroundColor: isDarkMode === true? "black" : "white",...styles.rows}}>
       <View
         style={{
           justifyContent: "space-around",

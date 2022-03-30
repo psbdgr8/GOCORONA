@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Switch,
 } from "react-native";
+import DarkMode, {darkModeContext} from "../API/Context"
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -15,10 +16,9 @@ import { RFPercentage } from "react-native-responsive-fontsize";
 import { useNavigation, useNavigationState } from "@react-navigation/native";
 const CustomDrawer = (props) => {
   const navigation = useNavigation();
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useContext(darkModeContext);
   function Mode() {
     setIsDarkMode((previousState) => !previousState);
-    navigation.setParams({isDarkMode});
   }
   return (
     <View style={{ flex: 1, backgroundColor: isDarkMode ? "black" : "white"}}>

@@ -23,9 +23,11 @@ import {Text} from "react-native";
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Pincode from "./screens/Pincode";
+import DarkMode, {darkModeContext} from "./API/Context"
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 function Routes() {
+  const [isDarkMode, setIsDarkMode] = useContext(darkModeContext);
   const navigation = useNavigation();
   return (
     <Drawer.Navigator
@@ -38,11 +40,18 @@ function Routes() {
           headerShown: true,
           headerTitle: "",
           title: "Home",
+          headerTintColor: isDarkMode === true ? '#fff':'#000',
+          headerStyle:
+         { backgroundColor: isDarkMode === true ? "black" : "white"},
+         headerTitleStyle: {
+          fontWeight: 'bold',
+          color: isDarkMode === true ? "white" : "black"
+        },
           headerShadowVisible: false,
           drawerLabel: "Home",
           drawerLabelStyle: {
             fontSize: RFPercentage(2),
-            color: "black",
+            color: isDarkMode === true ? "white" : "black",
             fontWeight: "bold",
           },
         }}
@@ -55,9 +64,16 @@ function Routes() {
           headerTitle: "All Countries",
           title: "All Countries",
           headerTitleAlign: "center",
+          headerTintColor: isDarkMode === true ? '#fff':'#000',
+          headerStyle:
+         { backgroundColor: isDarkMode === true ? "black" : "white"},
+         headerTitleStyle: {
+          fontWeight: 'bold',
+          color: isDarkMode === true ? "white" : "black"
+        },
           drawerLabelStyle: {
             fontSize: RFPercentage(2),
-            color: "black",
+            color: isDarkMode === true ? "white" : "black",
             fontWeight: "bold",
           },
         }}
@@ -69,9 +85,16 @@ function Routes() {
           headerShown: true,
           headerTitle: "States of India",
           headerTitleAlign: "center",
+          headerTintColor: isDarkMode === true ? '#fff':'#000',
+          headerStyle:
+         { backgroundColor: isDarkMode === true ? "black" : "white"},
+         headerTitleStyle: {
+          fontWeight: 'bold',
+          color: isDarkMode === true ? "white" : "black"
+        },
           drawerLabelStyle: {
             fontSize: RFPercentage(2),
-            color: "black",
+            color: isDarkMode === true ? "white" : "black",
             fontWeight: "bold",
           },
           title: "States of India",
@@ -84,17 +107,25 @@ function Routes() {
           headerShown: true,
           headerTitle: "Vaccine Availablity",
           headerTitleAlign: "center",
+          headerTintColor: isDarkMode === true ? '#fff':'#000',
+          headerStyle:
+         { backgroundColor: isDarkMode === true ? "black" : "white"},
+         headerTitleStyle: {
+          fontWeight: 'bold',
+          color: isDarkMode === true ? "white" : "black"
+        },
           headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate("Pincode")}>
               <IonIcon 
               name="search"
+
               size={RFPercentage(3)}
-              style={{marginRight: RFPercentage(1.5)}}
+              style={{marginRight: RFPercentage(1.5), color: isDarkMode === true ? "white" : "black"}}
               />
             </TouchableOpacity>),
           drawerLabelStyle: {
             fontSize: RFPercentage(2),
-            color: "black",
+            color: isDarkMode === true ? "white" : "black",
             fontWeight: "bold",
           },
           title: "Vaccine Availablity",
@@ -122,9 +153,16 @@ function Routes() {
           headerShown: true,
           headerTitle: "News",
           title: "News",
+          headerTintColor: isDarkMode === true ? '#fff':'#000',
+          headerStyle:
+         { backgroundColor: isDarkMode === true ? "black" : "white"},
+         headerTitleStyle: {
+          fontWeight: 'bold',
+          color: isDarkMode === true ? "white" : "black"
+        },
           drawerLabelStyle: {
             fontSize: RFPercentage(2),
-            color: "black",
+            color: isDarkMode === true ? "white" : "black",
             fontWeight: "bold",
           },
         }}
@@ -135,40 +173,84 @@ function Routes() {
   );
 }
 
-function App() {
-  return (
+function MainApp(){
+  const [isDarkMode] = useContext(darkModeContext);
+  return(
     <NavigationContainer>
       <StatusBar backgroundColor="transparent" animated={true}
         barStyle="dark-content" translucent={true}
       />
       <Stack.Navigator>
         <Stack.Screen
-          options={{ headerShown: false }}
+          options={{ headerShown: false,
+            headerTintColor: isDarkMode === true ? '#fff':'#000',
+            headerStyle:
+           { backgroundColor: isDarkMode === true ? "black" : "white"},
+           headerTitleStyle: {
+            fontWeight: 'bold',
+            color: isDarkMode === true ? "white" : "black"
+          }, }}
           name="Welcome"
           component={WelcomeScreen}
+          
         />
         <Stack.Screen
-          options={{ headerShown: true }}
+          options={{ headerShown: true,
+            headerTintColor: isDarkMode === true ? '#fff':'#000',
+            headerStyle:
+           { backgroundColor: isDarkMode === true ? "black" : "white"},
+           headerTitleStyle: {
+            fontWeight: 'bold',
+            color: isDarkMode === true ? "white" : "black"
+          }, }}
           name="Districts"
           component={VaccineStates}
         />
         <Stack.Screen
-          options={{ headerShown: true }}
+          options={{ headerShown: true,
+            headerTintColor: isDarkMode === true ? '#fff':'#000',
+            headerStyle:
+           { backgroundColor: isDarkMode === true ? "black" : "white"},
+           headerTitleStyle: {
+            fontWeight: 'bold',
+            color: isDarkMode === true ? "white" : "black"
+          }, }}
           name="Pincode"
           component={Pincode}
         />
         <Stack.Screen
-          options={{ headerShown: true }}
+          options={{ headerShown: true,
+            headerTintColor: isDarkMode === true ? '#fff':'#000',
+            headerStyle:
+           { backgroundColor: isDarkMode === true ? "black" : "white"},
+           headerTitleStyle: {
+            fontWeight: 'bold',
+            color: isDarkMode === true ? "white" : "black"
+          }, }}
           name="Vaccination"
           component={VaccineScreen}
         />
         <Stack.Screen
-          options={{ headerShown: true }}
+          options={{ headerShown: true,
+            headerTintColor: isDarkMode === true ? '#fff':'#000',
+            headerStyle:
+           { backgroundColor: isDarkMode === true ? "black" : "white"},
+           headerTitleStyle: {
+            fontWeight: 'bold',
+            color: isDarkMode === true ? "white" : "black"
+          }, }}
           name="Search"
           component={SearchByPincode}
         />
         <Stack.Screen
-          options={{ headerShown: true }}
+          options={{ headerShown: true,
+            headerTintColor: isDarkMode === true ? '#fff':'#000',
+            headerStyle:
+           { backgroundColor: isDarkMode === true ? "black" : "white"},
+           headerTitleStyle: {
+            fontWeight: 'bold',
+            color: isDarkMode === true ? "white" : "black"
+          }, }}
           name="Availablity"
           component={AvailableVaccine}
         />
@@ -177,6 +259,13 @@ function App() {
             headerShown: false,
             title: "",
             headerShadowVisible: false,
+            headerTintColor: isDarkMode === true ? '#fff':'#000',
+          headerStyle:
+         { backgroundColor: isDarkMode === true ? "black" : "white"},
+         headerTitleStyle: {
+          fontWeight: 'bold',
+          color: isDarkMode === true ? "white" : "black"
+        },
           }}
           name="COVID-19"
           component={Routes}
@@ -185,6 +274,13 @@ function App() {
           options={{
             headerShown: false,
             title: "News",
+            headerTintColor: isDarkMode === true ? '#fff':'#000',
+          headerStyle:
+         { backgroundColor: isDarkMode === true ? "black" : "white"},
+         headerTitleStyle: {
+          fontWeight: 'bold',
+          color: isDarkMode === true ? "white" : "black"
+        },
           }}
           name="News"
           component={NewsScreen}
@@ -194,12 +290,26 @@ function App() {
             headerShown: true,
             headerTitle: "Safety Tips and Precautions",
             title: "Safety Tips & Precautions",
+            headerTintColor: isDarkMode === true ? '#fff':'#000',
+          headerStyle:
+         { backgroundColor: isDarkMode === true ? "black" : "white"},
+         headerTitleStyle: {
+          fontWeight: 'bold',
+          color: isDarkMode === true ? "white" : "black"
+        },
           }}
           name="Safety"
           component={SafetyTipsScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
+  )
+}
+function App() {
+  return (
+    <DarkMode>
+    <MainApp/>
+    </DarkMode>
   );
 }
 export default App;

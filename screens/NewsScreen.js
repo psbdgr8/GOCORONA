@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View, Dimensions, ActivityIndicator, FlatList } from "react-native";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useNavigation } from "@react-navigation/core";
 import News from "../components/News";
 import Carousel, {Pagination} from "react-native-snap-carousel";
-
+import {darkModeContext} from "../API/Context"
 const NewsScreen = () => {
   const navigation = useNavigation();
+  const [isDarkMode] = useContext(darkModeContext);
   const url =
     "https://newsapi.org/v2/everything?q=coronavirus%covid&sortBy=popularity&language=en&apiKey=74475e7b2056458b89758418414e5621";
     const [data, setData] = useState();
@@ -30,7 +31,8 @@ const NewsScreen = () => {
     }, []);
     
     return (
-      <View style={styles.container}>
+      <View style={{
+        backgroundColor: isDarkMode === true ? "black" : "white", ...styles.container}}>
         {isLoading === true ? <ActivityIndicator size={"large"} 
         color={"cyan"} paddingTop={Dimensions.get("window").height/1.3}/> :
         <View style={styles.content}>
@@ -43,6 +45,8 @@ const NewsScreen = () => {
     layout="default"
     layoutCardOffset={10}
     ref={isCarousel}
+    autoplay={"true"}
+    loop
     data={data ? data.articles : 0}
     sliderWidth={Dimensions.get("window").width}
     itemWidth={Dimensions.get("window").width}
@@ -60,8 +64,8 @@ const NewsScreen = () => {
     height: 10,
     borderRadius: 5,
     marginHorizontal: 0,
-    color: "blue",
-    backgroundColor: 'rgba(0, 0, 0, 0.92)'
+    color:"blue",
+    backgroundColor: isDarkMode === true? "white" : "gray"
   }}
   inactiveDotOpacity={0.4}
   inactiveDotScale={0.6}
@@ -77,7 +81,6 @@ export default NewsScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white"
   },
  content: {
    flex:1.5

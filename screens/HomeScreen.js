@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import "react-native-gesture-handler";
-import React, { useState, Component, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { LineChart } from "react-native-chart-kit";
 import {
   StyleSheet,
@@ -15,8 +15,10 @@ import SwitchSelector from "react-native-switch-selector";
 import Card from "../components/Card";
 import { RFPercentage } from "react-native-responsive-fontsize";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import {darkModeContext} from "../API/Context"
 
 function Tracker() {
+  const [isDarkMode, setIsDarkMode] = useContext(darkModeContext);
   const [filter, setFilter] = useState();
   function World() {
     const url = "https://api.covid19api.com/summary";
@@ -50,8 +52,8 @@ function Tracker() {
             paddingTop={Dimensions.get("window").height / 2}
           />
         ) : (
-          <View style={styles.cardContainer}>
-            <Card style={styles.bottomCard1}>
+          <View style={{backgroundColor: isDarkMode === true? "black" : "white",...styles.cardContainer}}>
+            <Card style={{backgroundColor: isDarkMode === true? "black" : "white", ...styles.bottomCard1}}>
               <Text style={styles.bottomCardText}>Confirmed</Text>
               <Text style={styles.number}>
                 {data ? data.Global.TotalConfirmed : 0}
@@ -122,6 +124,7 @@ function Tracker() {
     );
   }
   function City() {
+    const [isDarkMode, setIsDarkMode] = useContext(darkModeContext);
     const url = "https://data.covid19india.org/state_district_wise.json";
     const [data, setData] = useState();
     const [isLoading, setIsloading] = useState(false);
@@ -229,6 +232,7 @@ function Tracker() {
     );
   }
   function State() {
+    const [isDarkMode, setIsDarkMode] = useContext(darkModeContext);
     const url =
       "https://api.covid19api.com/live/country/india/status/confirmed";
     const [data, setData] = useState();
@@ -325,6 +329,7 @@ function Tracker() {
     );
   }
   function Country() {
+    const [isDarkMode, setIsDarkMode] = useContext(darkModeContext);
     const url = "https://api.rootnet.in/covid19-in/stats/latest";
     const [data, setData] = useState();
     const [isLoading, setIsloading] = useState(false);
@@ -461,6 +466,7 @@ function Tracker() {
 }
 
 function Symptoms() {
+  const [isDarkMode, setIsDarkMode] = useContext(darkModeContext);
   return (
     <View style={{ alignContent: "center", alignSelf: "center" }}>
       <Card style={styles.symptoms}>
@@ -487,6 +493,7 @@ function Symptoms() {
 }
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const [isDarkMode, setIsDarkMode] = useContext(darkModeContext);
   const [showtracker, setShowTracker] = useState(true);
   const url = "https://api.covid19api.com/summary";
   const [data, setData] = useState();
@@ -506,9 +513,8 @@ const HomeScreen = () => {
     };
     fetchCovidData();
   }, []);
-
   return (
-    <View style={styles.container}>
+    <View style={{backgroundColor: isDarkMode === true? "black" : "white", ...styles.container}}>
       <Card style={styles.card}>
         <View style={styles.imageWrapper}>
           <Image
@@ -550,20 +556,18 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
     paddingTop: RFPercentage(2.7),
-    backgroundColor: "white",
   },
   cardContainer: {
     flex: 2,
     flexDirection: "row",
     flexWrap: "wrap",
-    backgroundColor: "white",
     justifyContent: "center",
   },
   number: {
@@ -742,3 +746,4 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 });
+export default HomeScreen;
