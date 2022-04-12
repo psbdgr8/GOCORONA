@@ -6,14 +6,17 @@ import {
   Image,
   TouchableOpacity,
   Switch,
+  Appearance
 } from "react-native";
-import DarkMode, {darkModeContext} from "../API/Context"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {darkModeContext} from "../API/Context"
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { RFPercentage } from "react-native-responsive-fontsize";
-import { useNavigation, useNavigationState } from "@react-navigation/native";
+import { useNavigation} from "@react-navigation/native";
+
 const CustomDrawer = (props) => {
   const navigation = useNavigation();
     const [isDarkMode, setIsDarkMode] = useContext(darkModeContext);
@@ -70,7 +73,7 @@ const CustomDrawer = (props) => {
           </Text>
           <Switch
             trackColor={{ true: "lightblue", false: "gray" }}
-            thumbColor={isDarkMode? "#1a1aff" : "white"}
+            thumbColor={isDarkMode === true ? "#1a1aff" : "white"}
             ios_backgroundColor="white"
             onValueChange={Mode}
             value={isDarkMode}

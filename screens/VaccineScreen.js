@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useEffect, useState } from "react";
+import React, { useEffect,useContext, useState } from "react";
 import {
   Text,
   View,
@@ -9,10 +9,12 @@ import {
   Image,
   Dimensions,
 } from "react-native";
+import { darkModeContext } from "../API/Context";
 import AvailableVaccine from "./AvailableVaccine";
 
 const VaccineScreen = ({ route }) => {
   const navigation = useNavigation();
+  const [isDarkMode] = useContext(darkModeContext);
   const { cityId } = route.params;
   const date = new Date().getDate();
   const month = new Date().getMonth()+1;
@@ -38,7 +40,7 @@ const VaccineScreen = ({ route }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={{backgroundColor: isDarkMode === true ? "black" : "white",...styles.container}}>
       {isLoading === true ? (
         <ActivityIndicator
           size={"large"}
@@ -63,6 +65,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexGrow: 1,
     width: "100%",
-    backgroundColor: "white"
+    
   },
 });

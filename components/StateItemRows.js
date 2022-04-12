@@ -1,23 +1,25 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Text, View, StyleSheet, Image, Dimensions } from 'react-native';
+import { darkModeContext } from '../API/Context';
 import Card from './Card';
 
 
 const StateItemRows = ({ item }) => {
+    const [isDarkMode] = useContext(darkModeContext)
     return (
-        <View style={styles.rows}>
+        <View style={{backgroundColor: isDarkMode === true ? "black" : "white", ...styles.rows}}>
             <View style={{
                 justifyContent: 'space-around'
             }}>
-                <Card style={styles.card}>
+                <Card style={{backgroundColor: isDarkMode === true ? "#101010": "#e8f2ff",...styles.card}}>
                  <View>
-                    <Text style={styles.title}>{item.Province}</Text>
+                    <Text style={{color: isDarkMode === true ? "white" : "brown", ...styles.title}}>{item.Province}</Text>
                 </View>
                 <View style={styles.case}>
-                    <Text style={styles.totalCases}>Total Confirmed: {item.Confirmed}</Text>
+                    <Text style={{color: isDarkMode === true ? "#ff1919": "red", ...styles.totalCases}}>Total Confirmed: {item.Confirmed}</Text>
                 </View>
                 <View style={styles.case}>
-                    <Text style={styles.death}>Total Deaths: {item.Deaths}</Text>
+                    <Text style={{color: isDarkMode === true ? "white": "black", ...styles.death}}>Total Deaths: {item.Deaths}</Text>
                 </View></Card>
             </View>
         </View>
@@ -36,7 +38,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         marginTop: 20,
         fontWeight: 'bold',
-        color: "brown",
         alignSelf: 'center',
         alignContent: 'center',
         alignItems: 'center'
@@ -46,7 +47,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         alignSelf: 'flex-start',
-        color: "red",
         margin: 10,
         marginLeft: 20,
     },
@@ -56,14 +56,12 @@ const styles = StyleSheet.create({
         margin: 10,
         fontWeight: 'bold',
         alignSelf: 'flex-start',
-        color: "gray",
         marginLeft: 20,
     },
     card: {
         height: Dimensions.get("window").width / 2.5,
         width: Dimensions.get("window").width / 1.1,
         marginHorizontal: Dimensions.get("window").width / 50,
-        backgroundColor: "#e8f2ff",
         borderRadius: 20,
         elevation: 5,
         alignSelf: 'center',

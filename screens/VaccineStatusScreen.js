@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View, ActivityIndicator, ScrollView, Dimensions, FlatList} from 'react-native'
-import React, {useState, useEffect} from 'react'
+import React, {useState,useContext, useEffect} from 'react'
 import Vaccine from '../components/Vaccine';
+import { darkModeContext } from '../API/Context';
 
 const VaccineStatusScreen = () => {
     const url = "https://cdn-api.co-vin.in/api/v2/admin/location/states";
     const [data, setData] = useState();
+    const [isDarkMode] =useContext(darkModeContext);
     const [isLoading, setIsloading] = useState(false);
     const [error,setError] = useState();
     useEffect(() => {
@@ -24,7 +26,7 @@ const VaccineStatusScreen = () => {
     }, []);
     
     return (
-      <View style={styles.container}>
+      <View style={{backgroundColor: isDarkMode === true? "black" : "white", ...styles.container}}>
         {isLoading === true ? <ActivityIndicator size={"large"} 
         color={"cyan"} paddingTop={Dimensions.get("window").height/2}/> :
         <FlatList 
@@ -42,7 +44,6 @@ export default VaccineStatusScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white",
         flexGrow: 1
     },
    

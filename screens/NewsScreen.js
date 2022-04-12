@@ -45,7 +45,9 @@ const NewsScreen = () => {
     layout="default"
     layoutCardOffset={10}
     ref={isCarousel}
-    autoplay={"true"}
+    autoplay={true}
+    autoplayDelay={1000}
+    autoplayInterval={8000}
     loop
     data={data ? data.articles : 0}
     sliderWidth={Dimensions.get("window").width}

@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,8 +10,10 @@ import {
 } from 'react-native';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { darkModeContext } from '../API/Context';
 
 const Pincode = () => {
+  const [isDarkMode] = useContext(darkModeContext);
     const [pincode, setPincode] = useState('');
     const navigation = useNavigation();
     const txtHandler = (enteredPincode) => {
@@ -24,17 +26,19 @@ const Pincode = () => {
     };
   
     return (
-      <View style={styles.container}>
+      <View style={{backgroundColor: isDarkMode === true ? "black" : "white", ...styles.container}}>
         <TextInput
-          style={styles.input}
+          style={{borderColor: isDarkMode === true ? "blue" : "black", ...styles.input}}
           placeholder="Enter your Pincode"
+          placeholderTextColor={isDarkMode === true ? "white" : "black"}
           value={pincode}
+          color={isDarkMode === true ? "white" : "black"}
           keyboardType='number-pad'
           onChangeText={txtHandler}
         />
         <Button title="Submit" onPress={btnHandler} style={styles.button} />
         <View style={styles.result}>
-          <Text style={styles.text}>
+          <Text style={{color: isDarkMode === true? "white" : "black", ...styles.text}}>
             {pincode !== ''
               ? `Your Pincode is ${pincode} click on Submit to find available slots`
               : 'Please enter your pincode'}
@@ -48,7 +52,6 @@ const Pincode = () => {
     container: {
         flex:1,
         flexGrow:1,
-        backgroundColor: "white",
       alignItems: 'center',
       justifyContent: "center",
     },

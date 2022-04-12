@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Text,
   View,
@@ -9,9 +9,11 @@ import {
   Touchable,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { darkModeContext } from "../API/Context";
 import Card from "./Card";
 
 const Vaccine = ({ item }) => {
+  const [isDarkMode] = useContext(darkModeContext);
   const navigation = useNavigation();
   const [id, setID] = useState();
   function one() {
@@ -19,9 +21,9 @@ const Vaccine = ({ item }) => {
     setID(item.state_id)
   }
   return (
-    <View style={styles.container}>
+    <View style={{backgroundColor: isDarkMode === true ? "black" : "white",...styles.container}}>
       <TouchableOpacity onPress={one}>
-        <Text style={styles.stateName}>{item.state_name}</Text>
+        <Text style={{color: isDarkMode === true? "white" : "black", ...styles.stateName}}>{item.state_name}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -31,13 +33,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginBottom: 5,
-    backgroundColor: "white",
     
   },
   stateName: {
     fontSize: 30,
     margin: 20,
-    color: "black",
     fontWeight: "bold"
   },
   card: {

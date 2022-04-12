@@ -12,17 +12,18 @@ const ItemRows = ({ item }) => {
           justifyContent: "space-around",
         }}
       >
-        <Card style={styles.card}>
+        <Card style={{backgroundColor: isDarkMode === true ? "#101010": "#e8f2ff", ...styles.card}}>
           <View>
-            <Text style={styles.countryName}>{item.Country}</Text>
+            <Text style={{
+    color: isDarkMode === true ? "white": "brown", ...styles.countryName}}>{item.Country}</Text>
           </View>
           <View style={styles.case}>
-            <Text style={styles.totalCases}>
+            <Text style={{color: isDarkMode === true ? "#ff1919": "red", ...styles.totalCases}}>
               Total Confirmed: {item.TotalConfirmed}
             </Text>
           </View>
           <View style={styles.case}>
-            <Text style={styles.death}>Total Deaths: {item.TotalDeaths}</Text>
+            <Text style={{color: isDarkMode === true ? "white": "black", ...styles.death}}>Total Deaths: {item.TotalDeaths}</Text>
           </View>
         </Card>
       </View>
@@ -42,7 +43,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginTop: 20,
     fontWeight: "bold",
-    color: "brown",
     alignSelf: "center",
     alignContent: "center",
     alignItems: "center",
@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     alignSelf: "flex-start",
-    color: "red",
     margin: 10,
     marginLeft: 20,
   },
@@ -62,14 +61,12 @@ const styles = StyleSheet.create({
     margin: 10,
     fontWeight: "bold",
     alignSelf: "flex-start",
-    color: "black",
     marginLeft: 20,
   },
   card: {
     height: Dimensions.get("window").width / 2.8,
     width: Dimensions.get("window").width / 1.1,
     marginHorizontal: Dimensions.get("window").width / 50,
-    backgroundColor: "#e8f2ff",
     borderRadius: 20,
     elevation: 5,
     alignSelf: "center",

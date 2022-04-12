@@ -15,7 +15,7 @@ import SwitchSelector from "react-native-switch-selector";
 import Card from "../components/Card";
 import { RFPercentage } from "react-native-responsive-fontsize";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import {darkModeContext} from "../API/Context"
+import { darkModeContext } from "../API/Context";
 
 function Tracker() {
   const [isDarkMode, setIsDarkMode] = useContext(darkModeContext);
@@ -52,24 +52,49 @@ function Tracker() {
             paddingTop={Dimensions.get("window").height / 2}
           />
         ) : (
-          <View style={{backgroundColor: isDarkMode === true? "black" : "white",...styles.cardContainer}}>
-            <Card style={{backgroundColor: isDarkMode === true? "black" : "white", ...styles.bottomCard1}}>
+          <View
+            style={{
+              backgroundColor: isDarkMode === true ? "black" : "white",
+              ...styles.cardContainer,
+            }}
+          >
+            <Card
+              style={{borderColor: isDarkMode === true ?"#FC1441" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard1,
+              }}
+            >
               <Text style={styles.bottomCardText}>Confirmed</Text>
               <Text style={styles.number}>
                 {data ? data.Global.TotalConfirmed : 0}
               </Text>
             </Card>
-            <Card style={styles.bottomCard2}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#157FFB" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard2,
+              }}
+            >
               <Text style={styles.bottomCardText2}>Active</Text>
               <Text style={styles.number2}>
                 {data ? data.Global.NewConfirmed : 0}
               </Text>
             </Card>
-            <Card style={styles.bottomCard3}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#30A64A" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard3,
+              }}
+            >
               <Text style={styles.bottomCardText3}>Recovered</Text>
               <Text style={styles.number3}>{recovered}</Text>
             </Card>
-            <Card style={styles.bottomCard4}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#6D757D" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard4,
+              }}
+            >
               <Text style={styles.bottomCardText4}>Deceased</Text>
               <Text style={styles.number4}>
                 {data ? data.Global.TotalDeaths : 0}
@@ -98,13 +123,13 @@ function Tracker() {
                 yAxisInterval={1}
                 verticalLabelRotation={-4}
                 chartConfig={{
-                  backgroundColor: "#fffffff",
-                  backgroundGradientFrom: "#ffffff",
-                  backgroundGradientTo: "#ffffff",
+                  backgroundColor: isDarkMode === true ? "black" : "#ffffff",
+                  backgroundGradientFrom: isDarkMode === true ? "black" : "#ffffff",
+                  backgroundGradientTo: isDarkMode === true ? "black" : "#ffffff",
                   decimalPlaces: 0,
                   barPercentage: 1,
-                  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  color: (opacity = 1) => isDarkMode === true ? `rgba(250, 250, 250, ${opacity})` : `rgba(0, 0, 0, ${opacity})`,
+                  labelColor: (opacity = 1) => isDarkMode === true ? `rgba(250, 250, 250, ${opacity})` : `rgba(0, 0, 0, ${opacity})`,
                   propsForDots: {
                     r: "4",
                     strokeWidth: "2",
@@ -153,25 +178,45 @@ function Tracker() {
           />
         ) : (
           <View style={styles.cardContainer}>
-            <Card style={styles.bottomCard1}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#FC1441" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard1,
+              }}
+            >
               <Text style={styles.bottomCardText}>Confirmed</Text>
               <Text style={styles.number}>
                 {data ? data.Maharashtra.districtData.Mumbai.confirmed : 0}
               </Text>
             </Card>
-            <Card style={styles.bottomCard2}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#157FFB" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard2,
+              }}
+            >
               <Text style={styles.bottomCardText2}>Active</Text>
               <Text style={styles.number2}>
                 {data ? data.Maharashtra.districtData.Mumbai.active : 0}
               </Text>
             </Card>
-            <Card style={styles.bottomCard3}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#30A64A" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard3,
+              }}
+            >
               <Text style={styles.bottomCardText3}>Recovered</Text>
               <Text style={styles.number3}>
                 {data ? data.Maharashtra.districtData.Mumbai.recovered : 0}
               </Text>
             </Card>
-            <Card style={styles.bottomCard4}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#6D757D" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard4,
+              }}
+            >
               <Text style={styles.bottomCardText4}>Deceased</Text>
               <Text style={styles.number4}>
                 {data ? data.Maharashtra.districtData.Mumbai.deceased : 0}
@@ -206,13 +251,13 @@ function Tracker() {
                 yAxisInterval={1}
                 verticalLabelRotation={-4}
                 chartConfig={{
-                  backgroundColor: "#fffffff",
-                  backgroundGradientFrom: "#ffffff",
-                  backgroundGradientTo: "#ffffff",
+                  backgroundColor: isDarkMode === true ? "black" : "#ffffff",
+                  backgroundGradientFrom: isDarkMode === true ? "black" : "#ffffff",
+                  backgroundGradientTo: isDarkMode === true ? "black" : "#ffffff",
                   decimalPlaces: 0,
                   barPercentage: 1,
-                  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  color: (opacity = 1) => isDarkMode === true ? `rgba(250, 250, 250, ${opacity})` : `rgba(0, 0, 0, ${opacity})`,
+                  labelColor: (opacity = 1) => isDarkMode === true ? `rgba(250, 250, 250, ${opacity})` : `rgba(0, 0, 0, ${opacity})`,
                   propsForDots: {
                     r: "4",
                     strokeWidth: "2",
@@ -262,21 +307,41 @@ function Tracker() {
           />
         ) : (
           <View style={styles.cardContainer}>
-            <Card style={styles.bottomCard1}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#FC1441" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard1,
+              }}
+            >
               <Text style={styles.bottomCardText}>Confirmed</Text>
               <Text style={styles.number}>{data ? data[13].Confirmed : 0}</Text>
             </Card>
-            <Card style={styles.bottomCard2}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#157FFB" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard2,
+              }}
+            >
               <Text style={styles.bottomCardText2}>Active</Text>
               <Text style={styles.number2}>{data ? data[13].Active : 0}</Text>
             </Card>
-            <Card style={styles.bottomCard3}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#30A64A" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard3,
+              }}
+            >
               <Text style={styles.bottomCardText3}>Recovered</Text>
               <Text style={styles.number3}>
                 {data ? data[13].Recovered : 0}
               </Text>
             </Card>
-            <Card style={styles.bottomCard4}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#6D757D" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard4,
+              }}
+            >
               <Text style={styles.bottomCardText4}>Deceased</Text>
               <Text style={styles.number4}>{data ? data[13].Deaths : 0}</Text>
             </Card>
@@ -303,13 +368,13 @@ function Tracker() {
                 yAxisInterval={1}
                 verticalLabelRotation={-4}
                 chartConfig={{
-                  backgroundColor: "#fffffff",
-                  backgroundGradientFrom: "#ffffff",
-                  backgroundGradientTo: "#ffffff",
+                  backgroundColor: isDarkMode === true ? "black" : "#ffffff",
+                  backgroundGradientFrom: isDarkMode === true ? "black" : "#ffffff",
+                  backgroundGradientTo: isDarkMode === true ? "black" : "#ffffff",
                   decimalPlaces: 0,
                   barPercentage: 1,
-                  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  color: (opacity = 1) => isDarkMode === true ? `rgba(250, 250, 250, ${opacity})` : `rgba(0, 0, 0, ${opacity})`,
+                  labelColor: (opacity = 1) => isDarkMode === true ? `rgba(250, 250, 250, ${opacity})` : `rgba(0, 0, 0, ${opacity})`,
                   propsForDots: {
                     r: "4",
                     strokeWidth: "2",
@@ -359,25 +424,45 @@ function Tracker() {
           />
         ) : (
           <View style={styles.cardContainer}>
-            <Card style={styles.bottomCard1}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#FC1441" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard1,
+              }}
+            >
               <Text style={styles.bottomCardText}>Confirmed</Text>
               <Text style={styles.number}>
                 {data ? data.data["unofficial-summary"][0].total : 0}
               </Text>
             </Card>
-            <Card style={styles.bottomCard2}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#157FFB" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard2,
+              }}
+            >
               <Text style={styles.bottomCardText2}>Active</Text>
               <Text style={styles.number2}>
                 {data ? data.data["unofficial-summary"][0].active : 0}
               </Text>
             </Card>
-            <Card style={styles.bottomCard3}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#30A64A" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard3,
+              }}
+            >
               <Text style={styles.bottomCardText3}>Recovered</Text>
               <Text style={styles.number3}>
                 {data ? data.data["unofficial-summary"][0].recovered : 0}
               </Text>
             </Card>
-            <Card style={styles.bottomCard4}>
+            <Card
+              style={{borderColor: isDarkMode === true ?"#6D757D" : "", borderWidth: isDarkMode === true? 2 : 0,
+                backgroundColor: isDarkMode === true ? "black" : "#E8F2FF",
+                ...styles.bottomCard4,
+              }}
+            >
               <Text style={styles.bottomCardText4}>Deceased</Text>
               <Text style={styles.number4}>
                 {data ? data.data["unofficial-summary"][0].deaths : 0}
@@ -406,13 +491,13 @@ function Tracker() {
                 yAxisInterval={1}
                 verticalLabelRotation={-4}
                 chartConfig={{
-                  backgroundColor: "#fffffff",
-                  backgroundGradientFrom: "#ffffff",
-                  backgroundGradientTo: "#ffffff",
+                  backgroundColor: isDarkMode === true ? "black" : "#ffffff",
+                  backgroundGradientFrom: isDarkMode === true ? "black" : "#ffffff",
+                  backgroundGradientTo: isDarkMode === true ? "black" : "#ffffff",
                   decimalPlaces: 0,
                   barPercentage: 1,
-                  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  color: (opacity = 1) => isDarkMode === true ? `rgba(250, 250, 250, ${opacity})` : `rgba(0, 0, 0, ${opacity})`,
+                  labelColor: (opacity = 1) => isDarkMode === true ? `rgba(250, 250, 250, ${opacity})` : `rgba(0, 0, 0, ${opacity})`,
                   propsForDots: {
                     r: "4",
                     strokeWidth: "2",
@@ -435,9 +520,10 @@ function Tracker() {
     <View style={{ flex: 3, justifyContent: "center" }}>
       <SwitchSelector
         initial={0}
-        textColor={"#B3B3B3"}
-        selectedColor={"#c9815b"}
-        buttonColor={"white"}
+        backgroundColor={isDarkMode === true ? "black" : "white"}
+        textColor={isDarkMode === true ? "white" : "#B3B3B3"}
+        selectedColor={isDarkMode === true ? "red" :"#c9815b"}
+        buttonColor={isDarkMode === true ? "black" : "white"}
         fontSize={RFPercentage(1.6)}
         options={[
           { label: "India", value: 1 },
@@ -469,7 +555,7 @@ function Symptoms() {
   const [isDarkMode, setIsDarkMode] = useContext(darkModeContext);
   return (
     <View style={{ alignContent: "center", alignSelf: "center" }}>
-      <Card style={styles.symptoms}>
+      <Card style={{backgroundColor: isDarkMode === false ?  "#e8f2ff"  : "black", ...styles.symptoms}}>
         <Text
           style={{
             fontSize: RFPercentage(2.8),
@@ -477,7 +563,7 @@ function Symptoms() {
             fontWeight: "900",
             lineHeight: RFPercentage(5),
             margin: 20,
-            color: "black",
+            color: isDarkMode === true ? "white" : "black",
             alignItems: "center",
           }}
         >
@@ -514,8 +600,15 @@ const HomeScreen = () => {
     fetchCovidData();
   }, []);
   return (
-    <View style={{backgroundColor: isDarkMode === true? "black" : "white", ...styles.container}}>
-      <Card style={styles.card}>
+    <View
+      style={{
+        backgroundColor: isDarkMode === true ? "black" : "white",
+        ...styles.container,
+      }}
+    >
+      <Card style={{backgroundColor: isDarkMode === true ? "black" : "#CFE3FC",
+      borderColor: isDarkMode === true ? "purple" : "", borderWidth: isDarkMode === true ? 2: 0,
+      ...styles.card}}>
         <View style={styles.imageWrapper}>
           <Image
             style={styles.mainImage}
@@ -528,19 +621,20 @@ const HomeScreen = () => {
               navigation.navigate("Safety");
             }}
           >
-            <Text style={styles.topText}>
+            <Text style={{color: isDarkMode ===true ? "white" : "black",...styles.topText}}>
               Know safety tips{"\n"}and precautions here.
             </Text>
           </TouchableOpacity>
         </View>
       </Card>
-      <Card style={styles.card2}>
+      <Card style={{backgroundColor: isDarkMode === true ? "black" : "#FBD8C5",borderColor: isDarkMode === true ? "green" : "", borderWidth: isDarkMode === true ? 0 : 0,
+       ...styles.card2}}>
         <SwitchSelector
           initial={0}
-          textColor={"#c9815b"}
-          selectedColor={"black"}
-          buttonColor={"white"}
-          backgroundColor={"#FBD8C5"}
+          textColor={isDarkMode === true ? "cyan" : "#c9815b"}
+          selectedColor={isDarkMode === true ? "white" : "black"}
+          buttonColor={isDarkMode === true ? "black" : "white"}
+          backgroundColor={isDarkMode === true ? "#202020" : "#FBD8C5"}
           fontSize={RFPercentage(2.5)}
           options={[
             { label: "Tracker", value: true },
@@ -555,7 +649,6 @@ const HomeScreen = () => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -574,7 +667,7 @@ const styles = StyleSheet.create({
     fontSize: RFPercentage(3),
     alignSelf: "flex-end",
     marginRight: 20,
-    marginTop: 65,
+    marginTop: 55,
     fontWeight: "bold",
     color: "#FC1441",
   },
@@ -582,7 +675,7 @@ const styles = StyleSheet.create({
     fontSize: RFPercentage(3),
     alignSelf: "flex-end",
     marginRight: 20,
-    marginTop: 65,
+    marginTop: 55,
     fontWeight: "bold",
     color: "#157FFB",
   },
@@ -590,7 +683,7 @@ const styles = StyleSheet.create({
     fontSize: RFPercentage(3),
     alignSelf: "flex-end",
     marginRight: 20,
-    marginTop: 65,
+    marginTop: 55,
     fontWeight: "bold",
     color: "#30A64A",
   },
@@ -598,7 +691,7 @@ const styles = StyleSheet.create({
     fontSize: RFPercentage(3),
     alignSelf: "flex-end",
     marginRight: 20,
-    marginTop: 65,
+    marginTop: 55,
     fontWeight: "bold",
     color: "#6D757D",
   },
@@ -619,14 +712,14 @@ const styles = StyleSheet.create({
   bottomCardText3: {
     marginLeft: Dimensions.get("window").width / 20,
     marginTop: Dimensions.get("window").width / 33,
-    fontSize: RFPercentage(2.4),
+    fontSize: RFPercentage(2.5),
     fontWeight: "900",
     color: "#30A64A",
   },
   bottomCardText4: {
     marginLeft: Dimensions.get("window").width / 20,
     marginTop: Dimensions.get("window").width / 33,
-    fontSize: RFPercentage(2.4),
+    fontSize: RFPercentage(2.5),
     fontWeight: "900",
     color: "#6D757D",
   },
@@ -641,7 +734,6 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").width / 3,
     width: Dimensions.get("window").width / 2.3,
     marginHorizontal: Dimensions.get("window").width / 50,
-    backgroundColor: "#e8f2ff",
     alignItems: "flex-start",
     borderRadius: 20,
   },
@@ -649,7 +741,6 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").width / 3,
     width: Dimensions.get("window").width / 2.3,
     marginHorizontal: Dimensions.get("window").width / 50,
-    backgroundColor: "#e8f2ff",
     alignItems: "flex-start",
     borderRadius: 20,
   },
@@ -657,7 +748,6 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").width / 3,
     width: Dimensions.get("window").width / 2.3,
     marginHorizontal: Dimensions.get("window").width / 50,
-    backgroundColor: "#e8f2ff",
     alignItems: "flex-start",
     borderRadius: 20,
   },
@@ -665,7 +755,6 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").width / 3,
     width: Dimensions.get("window").width / 2.3,
     marginHorizontal: Dimensions.get("window").width / 50,
-    backgroundColor: "#e8f2ff",
     alignItems: "flex-start",
     borderRadius: 20,
   },
@@ -698,7 +787,6 @@ const styles = StyleSheet.create({
     height: 130,
     elevation: 1,
     flexDirection: "row",
-    backgroundColor: "#CFE3FC",
     alignItems: "flex-start",
   },
   imageWrapper: {
@@ -719,7 +807,6 @@ const styles = StyleSheet.create({
     height: 50,
     elevation: 0,
     borderRadius: 50,
-    backgroundColor: "#FBD8C5",
     flexDirection: "row",
     justifyContent: "space-around",
   },
@@ -741,7 +828,6 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").width / 0.74,
     width: Dimensions.get("window").width / 1.1,
     marginHorizontal: Dimensions.get("window").width / 50,
-    backgroundColor: "#e8f2ff",
     alignItems: "flex-start",
     borderRadius: 20,
   },

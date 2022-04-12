@@ -6,14 +6,16 @@ import {
   Text,
   FlatList,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState,useContext, useEffect } from "react";
 import { useNavigation } from "@react-navigation/core";
 import { TextInput } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import VaccineByPincode from "./VaccineByPincode";
+import { darkModeContext } from "../API/Context";
 
 const SearchByPincode = ({route}) => {
   const {pincode} = route.params;
+  const [isDarkMode] = useContext(darkModeContext);
   const navigation = useNavigation();
   const date = new Date().getDate();
   const month = new Date().getMonth()+1;
@@ -39,7 +41,7 @@ const SearchByPincode = ({route}) => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{backgroundColor: isDarkMode === true ? "black" : "white", ...styles.container}}>
       <View>
         {isLoading === true ? (
           <ActivityIndicator
@@ -64,7 +66,6 @@ export default SearchByPincode;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
     flexGrow: 1,
   },
   textInput: {

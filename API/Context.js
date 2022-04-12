@@ -1,14 +1,21 @@
-import { createContext, useState } from 'react';
-
-//create a context, with createContext api
+import { createContext, useState, useEffect } from 'react';
+import { Appearance} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export const darkModeContext = createContext();
 
+   
 const DarkMode = (props) => {
-        // this state will be shared with all components 
+    const colorScheme = Appearance.getColorScheme();
     const [isDarkMode, setIsDarkMode] = useState();
-
+    useEffect(() => {
+        if (colorScheme === 'dark') {
+          setIsDarkMode(true)
+        }
+       }, []);
+  
+   
     return (
-                // this is the provider providing state
+        
         <darkModeContext.Provider value={[isDarkMode, setIsDarkMode]}>
             {props.children}
         </darkModeContext.Provider>

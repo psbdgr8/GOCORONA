@@ -19,10 +19,11 @@ import VaccineStates from "./components/VaccineStates";
 import VaccineScreen from "./screens/VaccineScreen";
 import AvailableVaccine from "./screens/AvailableVaccine";
 import SearchByPincode from "./screens/SearchByPincode";
-import {Text} from "react-native";
+import {Appearance} from "react-native";
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Pincode from "./screens/Pincode";
+import {useEffect} from "react"
 import DarkMode, {darkModeContext} from "./API/Context"
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -174,11 +175,13 @@ function Routes() {
 }
 
 function MainApp(){
-  const [isDarkMode] = useContext(darkModeContext);
+  const [isDarkMode, setIsDarkMode] = useContext(darkModeContext);
+  const colorScheme = Appearance.getColorScheme();
+  
   return(
     <NavigationContainer>
       <StatusBar backgroundColor="transparent" animated={true}
-        barStyle="dark-content" translucent={true}
+        barStyle={isDarkMode === true ? "light-content" : "dark-content"} translucent={true}
       />
       <Stack.Navigator>
         <Stack.Screen
@@ -306,6 +309,7 @@ function MainApp(){
   )
 }
 function App() {
+  
   return (
     <DarkMode>
     <MainApp/>

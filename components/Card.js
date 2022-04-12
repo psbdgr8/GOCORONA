@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 25,
     marginVertical: 10,
     borderRadius: 50,
-    borderWidth: 0,
     alignItems:'center',
   },
 });
